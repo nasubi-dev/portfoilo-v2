@@ -1,16 +1,28 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import BaseHead from "@/components/BaseHead.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Heading = {
+  depth: number;
+  text: string;
+  slug: string;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+type Props = {
+  headings?: Heading[];
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+};
+
+const { headings, title, description, pubDate, updatedDate } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="ja">
   <head>
     <BaseHead title={title} description={description} />
     <style>
@@ -18,15 +30,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         width: calc(100% - 2em);
         max-width: 100%;
         margin: 0;
-      }
-      .hero-image {
-        width: 100%;
-      }
-      .hero-image img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 12px;
-        box-shadow: var(--box-shadow);
       }
       .prose {
         width: 720px;
@@ -51,6 +54,163 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
       .last-updated-on {
         font-style: italic;
       }
+
+      /* YouTubeの埋め込み */
+      .youtube-embed {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 アスペクト比 */
+        margin: 2rem 0;
+      }
+      .youtube-embed iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.5rem;
+        border: none;
+      }
+
+      /* Twitter埋め込み */
+      .tweet-embed {
+        margin: 2rem 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      /* リンクカード */
+      .link-card {
+        display: flex;
+        border: 1px solid rgba(var(--gray), 0.2);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        text-decoration: none;
+        margin: 1.5rem 0;
+        transition: box-shadow 0.2s ease;
+      }
+
+      .link-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .link-card a {
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .link-card-image {
+        width: 200px;
+        min-width: 200px;
+        max-height: 150px;
+        overflow: hidden;
+      }
+
+      .link-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .link-card-content {
+        padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .link-card-content h4 {
+        margin: 0 0 0.5rem 0;
+        color: rgb(var(--black));
+      }
+
+      .link-card-content p {
+        margin: 0 0 0.5rem 0;
+        color: rgb(var(--gray-dark));
+        font-size: 0.9rem;
+      }
+
+      .link-card-site {
+        margin-top: auto;
+        font-size: 0.8rem;
+        color: rgb(var(--gray));
+      }
+
+      /* サイト別リンクカードのスタイリング */
+      .link-card.zenn {
+        border-color: #3ea8ff;
+      }
+
+      .link-card.qiita {
+        border-color: #55c500;
+      }
+
+      .link-card.internal {
+        border-color: var(--accent, #3b82f6);
+      }
+
+      /* 画像とビデオ */
+      .prose img,
+      .prose video {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 1.5rem 0;
+      }
+
+      /* アンカーリンク */
+      .anchor-link {
+        opacity: 0;
+        color: rgba(var(--gray), 0.8);
+        margin-left: 0.3em;
+        transition: opacity 0.2s ease;
+        text-decoration: none;
+      }
+
+      h1:hover .anchor-link,
+      h2:hover .anchor-link,
+      h3:hover .anchor-link,
+      h4:hover .anchor-link,
+      h5:hover .anchor-link {
+        opacity: 1;
+      }
+
+      /* コードブロックのスタイル調整 */
+      :root {
+        --astro-code-color-text: rgb(var(--gray-dark));
+        --astro-code-color-background: rgb(var(--gray-light));
+        --astro-code-token-constant: #5c6bc0;
+        --astro-code-token-string: #8bc34a;
+        --astro-code-token-comment: #90a4ae;
+        --astro-code-token-keyword: #f06292;
+        --astro-code-token-parameter: #e67e22;
+        --astro-code-token-function: #42a5f5;
+        --astro-code-token-string-expression: #66bb6a;
+        --astro-code-token-punctuation: #78909c;
+        --astro-code-token-link: #42a5f5;
+      }
+
+      @media (max-width: 768px) {
+        .link-card-image {
+          width: 120px;
+          min-width: 120px;
+        }
+
+        .link-card-content {
+          padding: 0.75rem;
+        }
+
+        .link-card-content h4 {
+          font-size: 1rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .link-card-content p {
+          font-size: 0.8rem;
+        }
+      }
     </style>
   </head>
 
@@ -58,13 +218,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     <Header />
     <main>
       <article>
-        <div class="hero-image">
-          {
-            heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
-            )
-          }
-        </div>
         <div class="prose">
           <div class="title">
             <div class="date">
@@ -80,6 +233,14 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             <h1>{title}</h1>
             <hr />
           </div>
+
+          <!-- 目次の追加 -->
+          {
+            headings && headings.length > 0 && (
+              <TableOfContents headings={headings} />
+            )
+          }
+
           <slot />
         </div>
       </article>

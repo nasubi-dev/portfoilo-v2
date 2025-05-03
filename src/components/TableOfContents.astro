@@ -1,0 +1,79 @@
+---
+type Heading = {
+  depth: number;
+  text: string;
+  slug: string;
+};
+// src/components/TableOfContents.astro
+
+type Props = {
+  headings: Heading[];
+};
+const { headings } = Astro.props;
+
+// 目次に表示する見出しをフィルタリング (h2, h3, h4のみ)
+const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
+---
+
+{
+  filteredHeadings.length > 1 && (
+    <nav class="toc">
+      <h2 class="toc-title">目次</h2>
+      <ul class="toc-list">
+        {filteredHeadings.map((heading) => (
+          <li
+            class={`toc-item toc-item-h${heading.depth}`}
+            style={`--depth: ${heading.depth - 2}`}
+          >
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<style>
+  .toc {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--gray-100, #f3f4f6);
+  }
+
+  .toc-title {
+    margin-top: 0;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-item {
+    margin: 0.5rem 0;
+    padding-left: calc(var(--depth) * 1.5rem);
+    line-height: 1.4;
+  }
+
+  .toc-item a {
+    color: var(--gray-800, #1f2937);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .toc-item a:hover {
+    color: var(--accent, #3b82f6);
+    text-decoration: underline;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .toc {
+      padding: 1rem;
+    }
+  }
+</style>
