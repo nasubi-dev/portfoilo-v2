@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# jetbrains setting folder
-.idea/
+# R2に保存している画像､動画ファイル等
+src/content/assets
+
+# secret files
+src/content/secrets
