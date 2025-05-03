@@ -23,5 +23,7 @@ pnpm-debug.log*
 # R2に保存している画像､動画ファイル等
 src/content/assets
 
-# secret files
+# obsidian vault
+src/content/.obsidian
+src/content/templates
 src/content/secrets
