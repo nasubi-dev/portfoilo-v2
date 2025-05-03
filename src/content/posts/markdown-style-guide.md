@@ -34,12 +34,12 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 ### Syntax
 
 ```markdown
-![Alt text](./full/or/relative/path/of/image)
+![[./full/or/relative/path/of/image|Alt text]]
 ```
 
 ### Output
 
-![blog placeholder](/blog-placeholder-about.jpg)
+![[/blog-placeholder-about.jpg|blog placeholder]]
 
 ## Blockquotes
 
