@@ -84,18 +84,18 @@ function remarkEmbedLinks() {
       }
 
       // Twitter
-      else if (url.match(/twitter\.com\/.*\/status\/(\d+)/)) {
-        const tweetId = url.match(/twitter\.com\/.*\/status\/(\d+)/)[1];
-        node.type = "html";
-        node.value = `<div class="tweet-embed" data-tweet-id="${tweetId}">
-          <blockquote class="twitter-tweet" data-dnt="true">
-            <a href="${url}" title="${
-          linkTitle || "Tweet"
-        }">Loading Tweet...</a>
-          </blockquote>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>`;
-      }
+      // else if (url.match(/twitter\.com\/.*\/status\/(\d+)/)) {
+      //   const tweetId = url.match(/twitter\.com\/.*\/status\/(\d+)/)[1];
+      //   node.type = "html";
+      //   node.value = `<div class="tweet-embed" data-tweet-id="${tweetId}">
+      //     <blockquote class="twitter-tweet" data-dnt="true">
+      //       <a href="${url}" title="${
+      //     linkTitle || "Tweet"
+      //   }">Loading Tweet...</a>
+      //     </blockquote>
+      //     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      //   </div>`;
+      // }
 
       // Zenn, Qiita, その他のリンク（OGP取得）
       else if (url.startsWith("http")) {

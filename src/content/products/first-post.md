@@ -11,10 +11,9 @@ heroImage: '/blog-placeholder-3.jpg'
 
 [[third-post]]
 
-てst
-
 ![[28Tech-loading-loop.webm]]
 
+[x.com/nasubi\_dev/status/1918003847152410916](https://x.com/nasubi_dev/status/1918003847152410916)
 
 [体温で動くエンジン作ってみた【スターリングエンジン】 - YouTube](https://www.youtube.com/watch?v=H0aXJKuXF38)
 
