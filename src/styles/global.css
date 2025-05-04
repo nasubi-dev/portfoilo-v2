@@ -123,3 +123,13 @@ hr {
 	display: flex;
 	align-items: center;
 }
+.search {
+	transition-duration: 300ms;
+	background: white;
+	border-radius: 8px;
+}
+
+.search:not(:has(.pagefind-ui__hidden)) {
+	padding: 16px;
+	border-radius: 16px;
+}

@@ -1,5 +1,6 @@
 ---
 import HeaderLink from "@/components/HeaderLink.astro";
+import Search from "./Search.astro";
 import { SITE_TITLE } from "@/consts";
 ---
 
@@ -12,6 +13,7 @@ import { SITE_TITLE } from "@/consts";
       <HeaderLink href="/products">Products</HeaderLink>
       <HeaderLink href="/about">About</HeaderLink>
     </div>
+    <Search />
     <div class="social-links">
       <a href="https://m.webtoo.ls/@astro" target="_blank">
         <span class="sr-only">Follow Astro on Mastodon</span>
