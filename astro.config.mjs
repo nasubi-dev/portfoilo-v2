@@ -5,7 +5,6 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { visit } from "unist-util-visit";
 
-
 // OGP情報を取得するヘルパー関数
 async function fetchOGP(url) {
   try {
@@ -128,9 +127,7 @@ function remarkEmbedLinks() {
 
           node.type = "html";
           node.value = `<div class="link-card ${siteClass}">
-            <a href="${url}" ${
-            !isInternal ? 'target="_blank" rel="noopener noreferrer"' : ""
-          }>
+            <a href="${url}" ${!isInternal ? 'target="_blank"' : ""}>
               ${imageHtml}
               <div class="link-card-content">
                 <h4>${title}</h4>
