@@ -208,11 +208,10 @@ function remarkWikiLinks() {
             value: `<video src="${r2Url}" controls width="100%" alt="${displayText}"></video>`,
           });
         } else {
-          // 画像
+          // 画像 - 直接HTMLとして出力 ASTノードが悪さをする(原因不明)
           parts.push({
-            type: "image",
-            url: r2Url,
-            alt: displayText,
+            type: "html",
+            value: `<img src="${r2Url}" alt="${displayText}" loading="lazy" />`,
           });
         }
 
@@ -227,7 +226,7 @@ function remarkWikiLinks() {
       // 元のノードを置き換え
       if (parts.length > 0) {
         parent.children.splice(index, 1, ...parts);
-        return index + parts.length;
+        return (index ?? 0) + parts.length;
       }
     });
 

@@ -4,12 +4,14 @@ description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Jul 08 2022'
 heroImage: '/blog-placeholder-3.jpg'
 ---
-![[assets/nasubi-new.webp]]
+![[nasubi-new.webp]]
 
 ![[nasubi-grayscale.webp]]
 
 
 [[third-post]]
+
+てst
 
 ![[28Tech-loading-loop.webm]]
 
