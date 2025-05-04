@@ -23,3 +23,16 @@ test hoge
 ```js
 const a = 1;
 ```
+
+```html
+<div>
+	<li>
+		<ul>
+		apple
+		<ul/>
+		<ul>
+		banana
+		<ul/>
+	<li/>
+<div/>
+```

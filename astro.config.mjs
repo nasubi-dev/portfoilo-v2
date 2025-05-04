@@ -5,6 +5,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { visit } from "unist-util-visit";
 
+
 // OGP情報を取得するヘルパー関数
 async function fetchOGP(url) {
   try {
@@ -283,6 +284,14 @@ export default defineConfig({
     domains: ["content.nasubi.dev"],
   },
   markdown: {
+    shikiConfig: {
+      theme: "houston",
+      // themes: {
+      //   dark: "houston",
+      //   light: "github-light",
+      // },
+      wrap: true,
+    },
     remarkPlugins: [remarkEmbedLinks, remarkWikiLinks],
     rehypePlugins: [
       rehypeSlug,
