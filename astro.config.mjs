@@ -283,20 +283,24 @@ export default defineConfig({
     domains: ["content.nasubi.dev"],
   },
   markdown: {
-    // remarkプラグイン
     remarkPlugins: [remarkEmbedLinks, remarkWikiLinks],
-    // rehypeプラグイン
     rehypePlugins: [
-      rehypeSlug, // 見出しにIDを追加
+      rehypeSlug,
       [
         rehypeAutolinkHeadings,
         {
-          behavior: "append", // アンカーリンクを見出しの後ろに追加
+          behavior: "after",
           content: {
             type: "element",
             tagName: "span",
-            properties: { className: ["anchor-link"] },
-            children: [{ type: "text", value: " #" }],
+            properties: { className: ["anchor-icon"] },
+            children: [{ type: "text", value: "🔗" }],
+          },
+          group: {
+            type: "element",
+            tagName: "div",
+            properties: { className: ["heading-wrapper"] },
+            children: [], // childrenは自動的に設定されるため空でOK
           },
         },
       ],

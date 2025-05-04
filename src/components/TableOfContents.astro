@@ -11,16 +11,15 @@ type Props = {
 };
 const { headings } = Astro.props;
 
-// 目次に表示する見出しをフィルタリング (h2, h3, h4のみ)
-const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 4);
+
 ---
 
 {
-  filteredHeadings.length > 1 && (
+  headings.length > 1 && (
     <nav class="toc">
       <h2 class="toc-title">目次</h2>
       <ul class="toc-list">
-        {filteredHeadings.map((heading) => (
+        {headings.map((heading) => (
           <li
             class={`toc-item toc-item-h${heading.depth}`}
             style={`--depth: ${heading.depth - 2}`}
