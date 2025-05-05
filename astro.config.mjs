@@ -283,10 +283,6 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       theme: "houston",
-      // themes: {
-      //   dark: "houston",
-      //   light: "github-light",
-      // },
       wrap: true,
     },
     remarkPlugins: [remarkEmbedLinks, remarkWikiLinks],
@@ -306,10 +302,17 @@ export default defineConfig({
             type: "element",
             tagName: "div",
             properties: { className: ["heading-wrapper"] },
-            children: [], // childrenは自動的に設定されるため空でOK
+            children: [],
           },
         },
       ],
     ],
+  },
+  vite: {
+    css: {
+      postcss: {
+        plugins: [],
+      },
+    },
   },
 });
