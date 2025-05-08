@@ -5,62 +5,95 @@ export default defineConfig({
   preflight: true,
 
   // Where to look for your css declarations
-  include: ["./src/**/*.{js,jsx,ts,tsx,astro}"],
+  include: [
+    "./src/**/*.{js,jsx,ts,tsx,astro}",
+    "./pages/**/*.{js,jsx,ts,tsx,astro}",
+  ],
 
   // Files to exclude
   exclude: [],
 
+  // Global CSS settings
+  // globalFontface: {
+  //   "Noto Sans JP": [
+  //     {
+  //       fontStyle: "normal",
+  //       fontWeight: "400",
+  //       src: "url('/fonts/NotoSansJP-Regular.woff2') format('woff2')",
+  //     },
+  //     {
+  //       fontStyle: "normal",
+  //       fontWeight: "700",
+  //       src: "url('/fonts/NotoSansJP-Bold.woff2') format('woff2')",
+  //     },
+  //   ],
+  //   twemoji: {
+  //     fontStyle: "normal",
+  //     fontWeight: "400",
+  //     src: "url('/fonts/TwitterColorEmoji-SVGinOT.ttf') format('truetype')",
+  //   },
+  // },
+  // globalVars: {
+  //   "--font-noto-sans-jp": " twemoji, 'Noto Sans JP', sans-serif",
+  // },
+  // globalCss: {
+  //   "html, body": {
+  //     // color: "wkb.text",
+  //     // bg: "wkb.bg",
+  //     fontFeatureSettings: "'plat'",
+  //     fontFamily: "var(--font-noto-sans-jp)",
+  //     scrollBehavior: "smooth",
+  //     scrollPaddingTop: "120px",
+  //   },
+  // },
+
+  // dark mode settings
+  // conditions: {
+  //   dark: ".dark &",
+  // },
+
   // Useful for theme customization
   theme: {
     extend: {
-      tokens: {
-        colors: {
-          accent: { value: "#2337ff" },
-          accentDark: { value: "#000d8a" },
-          black: { value: "rgb(15, 18, 25)" },
-          gray: { value: "rgb(96, 115, 159)" },
-          grayLight: { value: "rgb(229, 233, 240)" },
-          grayDark: { value: "rgb(34, 41, 57)" },
-        },
-        shadows: {
-          box: {
-            value:
-              "0 2px 6px rgba(96, 115, 159, 25%), 0 8px 24px rgba(96, 115, 159, 33%), 0 16px 32px rgba(96, 115, 159, 33%)",
-          },
-        },
-      },
-      semanticTokens: {
-        colors: {
-          accent: { value: "{colors.accent}" },
-          accentDark: { value: "{colors.accentDark}" },
-          black: { value: "{colors.black}" },
-          gray: { value: "{colors.gray}" },
-          grayLight: { value: "{colors.grayLight}" },
-          grayDark: { value: "{colors.grayDark}" },
-        },
-      },
+      // tokens: {
+      //   fonts: {
+      //     sans: {
+      //       value: "var(--font-noto-sans-jp), sans-serif",
+      //     },
+      //   },
+      //   colors: {
+      //     "nsb-neutral": {
+      //       0: { value: "#FFFFFF" },
+      //       100: { value: "#F7F7F7" },
+      //       300: { value: "#757575" },
+      //       700: { value: "#2C2C2C" },
+      //       900: { value: "#1E1E1E" },
+      //     },
+      //     "nsb-purple": { value: "#FF3D00" },
+      //     "nsb-green": { value: "#00A3FF" },
+      //     // "external-link": {
+      //     //   "zenn": { value: "#00A3FF" },
+      //     //   "qiita": { value: "#55C500" },
+      //     //   "github": { value: "#000000" },
+      //     //   "twitter": { value: "#1DA1F2" },
+      //     // }
+      //   },
+      // },
+      // semanticTokens: {
+      //   colors: {
+      //     "nsb.primary": { value: "{colors.nsb-purple}" },
+      //     "nsb.secondary": { value: "{colors.nsb-green}" },
+      //     "nsb.text": { value: "{colors.nsb-neutral.700}" },
+      //     "nsb.text-variant": { value: "{colors.nsb-neutral.300}" },
+      //     "nsb.bg-overlay": { value: "{colors.nsb-neutral.0}" },
+      //     "nsb.bg-on": { value: "{colors.nsb-neutral.100}" },
+      //   },
+      // },
     },
   },
 
   // The output directory for your css system
   outdir: "styled-system",
 
-  // パターンを使用可能にする
-  patterns: {
-    extend: {
-      flex: {
-        description: "Flex layout utilities",
-        properties: {
-          direction: { type: "property", value: "flexDirection" },
-          align: { type: "property", value: "alignItems" },
-          justify: { type: "property", value: "justifyContent" },
-          wrap: { type: "property", value: "flexWrap" },
-          gap: { type: "property", value: "gap" },
-        },
-      },
-    },
-  },
-
-  // Astro用の設定
-  jsxFramework: "react",
+  // jsxFramework: "react",
 });
