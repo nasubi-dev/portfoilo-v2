@@ -1,28 +1,15 @@
 ---
-import "@/styles/global.css";
-import { css } from "../../styled-system/css";
-
-import BaseHead from "@/components/BaseHead.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import { styled as p } from "@styled-system/jsx";
+import HomeLayout from "@/layouts/HomeLayout.astro";
+import { Expanded } from "@/components/common/Expanded.tsx";
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header />
-    <main>
-      <h1>🍆 Hello, everyone!</h1>
-      <p>
-        ここは制作途中!!
-        <br />
-        なんか <b>GSAP</b> でゴリゴリにアニメーションさせる
-      </p>
-    </main>
-    <Footer />
-  </body>
-</html>
+<HomeLayout>
+  <Expanded basedOn="screen" items="center">
+    <p.p>🍆 Hello, everyone!</p.p>
+    <p.p> ここは制作途中!! </p.p>
+    <p.p>
+      なんか <b>GSAP</b> でゴリゴリにアニメーションさせたい
+    </p.p>
+  </Expanded>
+</HomeLayout>
