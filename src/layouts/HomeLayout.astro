@@ -1,6 +1,7 @@
 ---
 import "@/styles/global.css";
 import { css } from "@styled-system/css";
+import { Expanded } from "@/components/common/Expanded";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 
 const { image = "/blog-placeholder-1.jpg" } = Astro.props;
@@ -61,6 +62,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
   </head>
   <body>
-    <slot />
+    <Expanded onBase="screen">
+      <slot />
+    </Expanded>
   </body>
 </html>

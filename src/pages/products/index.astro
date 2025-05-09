@@ -1,19 +1,15 @@
 ---
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import FormattedDate from "@/components/FormattedDate.astro";
+import { Expanded } from "@/components/common/Expanded";
 
 const posts = (await getCollection("products")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
-<!doctype html>
-<html lang="ja">
-  <head>
-    <!-- <style>
+<!-- <style>
       main {
         width: 960px;
       }
@@ -82,33 +78,22 @@ const posts = (await getCollection("products")).sort(
         }
       }
     </style> -->
-  </head>
-  <body>
-    <Header />
-    <main>
-      <section>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <a href={`/products/${post.id}/`}>
-                  <img
-                    width={720}
-                    height={360}
-                    src={post.data.heroImage}
-                    alt=""
-                  />
-                  <h4 class="title">{post.data.title}</h4>
-                  <p class="date">
-                    <FormattedDate date={post.data.pubDate} />
-                  </p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </section>
-    </main>
-    <Footer />
-  </body>
-</html>
+<BaseLayout>
+  <Expanded basedOn="container" items="center">
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/products/${post.id}/`}>
+              <img src={post.data.heroImage} alt="" />
+              <h4 class="title">{post.data.title}</h4>
+              <p class="date">
+                <FormattedDate date={post.data.pubDate} />
+              </p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </Expanded>
+</BaseLayout>
