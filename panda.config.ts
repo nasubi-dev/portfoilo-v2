@@ -38,8 +38,8 @@ export default defineConfig({
   },
   globalCss: {
     "html, body": {
-      // color: "wkb.text",
-      // bg: "wkb.bg",
+      color: "nsb.text",
+      bg: "nsb.bg-overlay",
       fontFeatureSettings: "'plat'",
       fontFamily: "var(--noto-sans-jp)",
       scrollBehavior: "smooth",
@@ -62,14 +62,14 @@ export default defineConfig({
         },
         colors: {
           "nsb-neutral": {
-            0: { value: "#FFFFFF" },
-            100: { value: "#F7F7F7" },
+            0: { value: "#F9F2F2" },
+            100: { value: "#E2DCDC" },
             300: { value: "#757575" },
             700: { value: "#2C2C2C" },
             900: { value: "#1E1E1E" },
           },
-          "nsb-purple": { value: "#FF3D00" },
-          "nsb-green": { value: "#00A3FF" },
+          "nsb-purple": { value: "#fb33ff" },
+          "nsb-green": { value: "#7deda0" },
           // "external-link": {
           //   "zenn": { value: "#00A3FF" },
           //   "qiita": { value: "#55C500" },

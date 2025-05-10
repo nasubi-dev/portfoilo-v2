@@ -4,7 +4,7 @@ slug: first-post
 title: first-post
 author: nasubi
 description: 
-tags: 
+tags: []
 createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
 thumbnail:
@@ -30,3 +30,6 @@ thumbnail:
 [SoundCloud - Hear the world’s sounds](https://soundcloud.com/you/likes)
 
 [Stream RAY VOLPE - LASERBEAM by RAY VOLPE 🤖 \| Listen online for free on SoundCloud](https://soundcloud.com/rayvolpemusic/laserbeam)
+
+
+https://www.youtube.com/watch?v=H0aXJKuXF38
