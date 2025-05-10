@@ -2,6 +2,8 @@
 import "@/styles/global.css";
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlogPost from "@/layouts/BlogPost.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ContentContainer } from "@/components/common/ContentContainer";
 import { render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -17,6 +19,10 @@ const post = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<BlogPost headings={headings} {...post.data}>
-  <Content />
-</BlogPost>
+<BaseLayout>
+  <ContentContainer widthLimit>
+    <BlogPost headings={headings} {...post.data}>
+      <Content />
+    </BlogPost>
+  </ContentContainer>
+</BaseLayout>
