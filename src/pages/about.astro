@@ -1,18 +1,27 @@
 ---
 import "@/styles/global.css";
 import Layout from "@/layouts/BlogPost.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ContentContainer } from "@/components/common/ContentContainer";
 ---
 
-<Layout
-  id="testtesttesttest"
-  slug="about"
-  author="nasubi"
-  title="About Me"
-  description="自己紹介ページ"
-  createdAt={new Date("August 08 2021")}
-  updatedAt={new Date("August 08 2021")}
-  tags={["tag1", "tag2"]}
->
-  <img src="https://content.nasubi.dev/assets/nasubi-new.webp" alt="nasubi" />
-  <p>test test</p>
-</Layout>
+<BaseLayout>
+  <ContentContainer widthLimit>
+    <Layout
+      id="testtesttesttest"
+      slug="about"
+      author="nasubi"
+      title="About Me"
+      description="自己紹介ページ"
+      createdAt={new Date("August 08 2021")}
+      updatedAt={new Date("August 08 2021")}
+      tags={["tag1", "tag2"]}
+    >
+      <img
+        src="https://content.nasubi.dev/assets/nasubi-new.webp"
+        alt="nasubi"
+      />
+      <p>test test</p>
+    </Layout>
+  </ContentContainer>
+</BaseLayout>
