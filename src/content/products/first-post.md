@@ -1,9 +1,15 @@
 ---
-title: 'First post'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
-heroImage: '/blog-placeholder-3.jpg'
+id: Rimb8LWXEAAUEbp4dYS3T
+slug: first-post
+title: first-post
+author: nasubi
+description: 
+tags: 
+createdAt: 2025-05-10T06:57+09:00
+updatedAt: 2025-05-10T06:57+09:00
+thumbnail:
 ---
+
 ![[nasubi-new.webp]]
 
 ![[nasubi-grayscale.webp]]

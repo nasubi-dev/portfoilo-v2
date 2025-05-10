@@ -1,8 +1,13 @@
 ---
-title: "Second post"
-description: "Lorem ipsum dolor sit amet"
-pubDate: "Jul 15 2022"
-heroImage: "/blog-placeholder-4.jpg"
+id: WhlauWmnUJzs0J63ltQjV
+slug: second-post
+title: second-post
+author: nasubi
+description: 
+tags: 
+createdAt: 2025-05-10T06:57+09:00
+updatedAt: 2025-05-10T06:57+09:00
+thumbnail:
 ---
 ## Another heading
 test hoge
@@ -38,3 +43,4 @@ const a = 1;
 	<li/>
 <div/>
 ```
+

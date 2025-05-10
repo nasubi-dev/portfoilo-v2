@@ -12,13 +12,31 @@ type Heading = {
 
 type Props = {
   headings?: Heading[];
+  id: string;
   title: string;
-  description: string;
-  pubDate: Date;
-  updatedDate?: Date;
+  slug: string;
+  author: string;
+  description?: string | null;
+  createdAt: Date;
+  updatedAt?: Date;
+  tags?: string[] | null;
+  thumbnail?: string | null;
+  icon?: string | null;
 };
 
-const { headings, title, description, pubDate, updatedDate } = Astro.props;
+const {
+  headings,
+  id,
+  title,
+  slug,
+  author,
+  description,
+  createdAt,
+  updatedAt,
+  tags = [],
+  thumbnail,
+  icon,
+} = Astro.props;
 ---
 
 <html lang="ja">
@@ -219,11 +237,11 @@ const { headings, title, description, pubDate, updatedDate } = Astro.props;
         <div class="prose">
           <div class="title">
             <div class="date">
-              <FormattedDate date={pubDate} />
+              <FormattedDate date={createdAt} />
               {
-                updatedDate && (
+                updatedAt && (
                   <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
+                    Last updated on <FormattedDate date={updatedAt} />
                   </div>
                 )
               }
@@ -238,7 +256,6 @@ const { headings, title, description, pubDate, updatedDate } = Astro.props;
               <TableOfContents headings={headings} />
             )
           }
-
           <slot />
         </div>
       </article>
