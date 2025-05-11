@@ -2,26 +2,17 @@
 import FormattedDate from "@/components/FormattedDate.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import { css } from "@styled-system/css";
+import type { Heading, Product, Post } from "@/type";
 
-type Heading = {
-  depth: number;
-  text: string;
-  slug: string;
-};
-
-type Props = {
-  headings?: Heading[];
-  id: string;
-  title: string;
-  slug: string;
-  author: string;
-  description?: string | null;
-  createdAt: Date;
-  updatedAt?: Date;
-  tags?: string[] | null;
-  thumbnail?: string | null;
-  icon?: string | null;
-};
+type Props =
+  | (Product & {
+      headings: Heading[];
+      icon?: string | null;
+    })
+  | (Post & {
+      headings: Heading[];
+      thumbnail?: string | null;
+    });
 
 const {
   headings,
@@ -33,8 +24,8 @@ const {
   createdAt,
   updatedAt,
   tags = [],
-  thumbnail,
-  icon,
+  thumbnail = null,
+  icon = null,
 } = Astro.props;
 ---
 

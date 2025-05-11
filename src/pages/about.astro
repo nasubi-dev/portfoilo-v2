@@ -8,14 +8,32 @@ import { ContentContainer } from "@/components/common/ContentContainer";
 <BaseLayout>
   <ContentContainer widthLimit>
     <Layout
-      id="testtesttesttest"
+      id="about"
+      title="About"
       slug="about"
       author="nasubi"
-      title="About Me"
-      description="自己紹介ページ"
-      createdAt={new Date("August 08 2021")}
-      updatedAt={new Date("August 08 2021")}
-      tags={["tag1", "tag2"]}
+      createdAt={new Date()}
+      updatedAt={new Date()}
+      description="test test"
+      tags={["test", "test"]}
+      thumbnail="https://content.nasubi.dev/assets/nasubi-new.webp"
+      headings={[
+        {
+          depth: 1,
+          text: "test",
+          slug: "test",
+        },
+        {
+          depth: 2,
+          text: "test",
+          slug: "test-1",
+        },
+        {
+          depth: 3,
+          text: "test",
+          slug: "test-2",
+        },
+      ]}
     >
       <img
         src="https://content.nasubi.dev/assets/nasubi-new.webp"

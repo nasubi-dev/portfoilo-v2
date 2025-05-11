@@ -1,0 +1,37 @@
+---
+import FormattedDate from "@/components/FormattedDate.astro";
+import { R2_BUCKET } from "@/consts";
+import { type Product } from "@/type";
+
+type Props = Product;
+
+const {
+  id,
+  title,
+  slug,
+  author,
+  createdAt,
+  updatedAt,
+  description,
+  tags,
+  thumbnail,
+} = Astro.props;
+---
+
+<a href={`/products/${slug}/`}>
+  {
+    thumbnail ? (
+      <img src={`${R2_BUCKET}/${thumbnail}`} alt={title} class="thumbnail" />
+    ) : (
+      <img
+        src="https://content.nasubi.dev/assets/nasubi-new.webp"
+        alt={title}
+        class="thumbnail"
+      />
+    )
+  }
+  <h4 class="title">{title}</h4>
+  <p class="date">
+    <FormattedDate date={createdAt} />
+  </p>
+</a>

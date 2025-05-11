@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'nasubi.dev';
 export const SITE_DESCRIPTION = 'Welcome to nasubi.dev';
+export const R2_BUCKET = 'content.nasubi.dev/assets';

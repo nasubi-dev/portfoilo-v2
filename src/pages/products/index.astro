@@ -1,31 +1,25 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import FormattedDate from "@/components/FormattedDate.astro";
 import { ContentContainer } from "@/components/common/ContentContainer";
+import ProductCard from "@/components/ProductCard.astro";
+import { type Product } from "@/type";
+import { Grid, styled as p } from "@styled-system/jsx";
 
-// createdAtは
-const posts = (await getCollection("products")).sort(
-  (a, b) => new Date(b.data.createdAt).getTime() - new Date(a.data.createdAt).getTime()
-);
+const productsCollection = await getCollection("products");
+const products = productsCollection
+  .map((product) => {
+    return product.data as Product;
+  })
+  .sort(
+    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  );
 ---
 
 <BaseLayout>
   <ContentContainer widthLimit>
-    <ul>
-      {
-        posts.map((post) => (
-          <li>
-            <a href={`/products/${post.id}/`}>
-              <img src={post.data.thumbnail} alt="" />
-              <h4 class="title">{post.data.title}</h4>
-              <p class="date">
-                <FormattedDate date={post.data.createdAt} />
-              </p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+    <Grid>
+      {products.map((product) => <ProductCard {...product} />)}
+    </Grid>
   </ContentContainer>
 </BaseLayout>

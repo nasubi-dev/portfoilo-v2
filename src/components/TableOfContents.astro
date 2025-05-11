@@ -1,17 +1,10 @@
 ---
-type Heading = {
-  depth: number;
-  text: string;
-  slug: string;
-};
-// src/components/TableOfContents.astro
+import { type Heading } from "@/type";
 
 type Props = {
   headings: Heading[];
 };
 const { headings } = Astro.props;
-
-
 ---
 
 {
