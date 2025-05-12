@@ -1,5 +1,4 @@
 ---
-import HeaderLink from "@/components/HeaderLink.astro";
 import Search from "./Search.astro";
 import { css } from "@styled-system/css";
 import { HStack, styled as p } from "@styled-system/jsx";
@@ -7,12 +6,14 @@ import { SITE_TITLE } from "@/consts";
 import { Button } from "@/components/common/Button";
 import TwitterIcon from "../../public/MdiTwitter.svg";
 import GithubIcon from "../../public/MdiGithub.svg";
+import SearchIcon from "../../public/MdiMagnify.svg";
+import { SearchModal } from "@/components/SearchModal.tsx";
 ---
 
 <header>
   <nav class={css({ margin: "30px" })}>
     <HStack
-      width="100%"
+      width="calc(100% - 60px)"
       maxWidth="1200px"
       minWidth="320px"
       margin="30px auto"
@@ -33,30 +34,50 @@ import GithubIcon from "../../public/MdiGithub.svg";
 
       <p.div visibility="collapse" ml={"auto"} md={{ visibility: "visible" }}>
         <HStack gap="1em">
-          <p.a href="/">
-            <Button href="/" variant="light">Home</Button>
-          </p.a>
           <p.a href="/blog/">
-            <Button href="/blog/" variant="light">Blog</Button>
+            <Button variant="light">Blog</Button>
           </p.a>
           <p.a href="/products/">
-            <Button href="/products/" variant="light">Products</Button>
+            <Button variant="light">Products</Button>
           </p.a>
           <p.a href="/about/">
-            <Button href="/about/" variant="light">About</Button>
+            <Button variant="light">About</Button>
           </p.a>
         </HStack>
       </p.div>
       <p.div visibility="visible" md={{ visibility: "collapse" }} ml="auto">
-        test
+        <Button variant="filled" size="md"> menu </Button>
       </p.div>
 
-      <p.div visibility="collapse" lg={{ visibility: "visible" }}>
-        <Search />
-      </p.div>
+      <SearchModal client:load />
 
       <p.div visibility="collapse" lg={{ visibility: "visible" }}>
+        <Button variant="none" size="sm" id="search-button" client:load>
+          <Search />
+        </Button>
+      </p.div>
+
+      <p.div visibility="collapse" md={{ visibility: "visible" }}>
         <HStack>
+          <p.div
+            visibility="collapse"
+            md={{ visibility: "visible" }}
+            lg={{ visibility: "collapse" }}
+          >
+            <Button
+              variant="none"
+              size="sm"
+              ml="auto"
+              id="search-button-mobile"
+            >
+              <SearchIcon
+                width="28px"
+                height="28px"
+                fill="currentColor"
+                class={css({ margin: "0 0.5em" })}
+              />
+            </Button>
+          </p.div>
           <p.a href="https://twitter.com/nasubi_dev" target="_blank">
             <TwitterIcon
               width="32px"

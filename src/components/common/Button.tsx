@@ -42,6 +42,11 @@ export const cvaButton = cva({
         color: "colorPalette",
         _enabled: { _hover: { bg: "colorPalette/10" } },
       },
+      none: {
+        bg: "initial",
+        color: "initial",
+        _enabled: { _hover: { bg: "initial" } },
+      },
     },
     size: {
       sm: {

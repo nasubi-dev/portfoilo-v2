@@ -26,6 +26,14 @@ export const cvaExpanded = cva({
         alignItems: "center",
       },
     },
+    overflowX: {
+      auto: {
+        overflowX: "auto",
+      },
+      clip: {
+        overflowX: "clip",
+      },
+    }
   },
 });
 

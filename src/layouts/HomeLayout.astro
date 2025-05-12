@@ -62,7 +62,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
   </head>
   <body>
-    <Expanded onBase="screen">
+    <Expanded onBase="screen" overflowX="clip">
       <slot />
     </Expanded>
   </body>
