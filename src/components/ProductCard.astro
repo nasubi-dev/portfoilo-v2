@@ -3,7 +3,9 @@ import TagsList from "./TagsList.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import { R2_BUCKET } from "@/consts";
 import { type Product } from "@/type";
+import { css } from "@styled-system/css";
 import { styled as p, HStack, VStack } from "@styled-system/jsx";
+import { Image } from "astro:assets";
 
 type Props = Product;
 
@@ -54,15 +56,19 @@ const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
     minWidth="300px"
   >
     <p.div width="100%" paddingTop="75%" position="relative" overflow="hidden">
-      <p.img
+      <Image
         src={`${R2_BUCKET}/${replaceThumbnail}`}
         alt={title}
-        position="absolute"
-        top="0"
-        left="0"
-        width="100%"
-        height="100%"
-        objectFit="cover"
+        inferSize
+        loading="eager"
+        class={css({
+          position: "absolute",
+          top: "0",
+          left: "0",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        })}
       />
     </p.div>
 

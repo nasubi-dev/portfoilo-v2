@@ -279,7 +279,14 @@ export default defineConfig({
   site: "https://nasubi.dev",
   integrations: [react(), sitemap()],
   image: {
-    domains: ["content.nasubi.dev"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "content.nasubi.dev",
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
   markdown: {
     shikiConfig: {

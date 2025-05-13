@@ -28,13 +28,13 @@ const { Content, headings } = await render(post);
         <p.div flexGrow={1} width="100%" padding="4">
           <Content />
         </p.div>
-        <p.div display={{ base: "none", md: "block" }} marginBottom="4">
-          {
-            headings && headings.length > 0 && (
+        {
+          headings && headings.length > 0 && (
+            <p.div display={{ base: "none", md: "block" }} marginBottom="4">
               <TableOfContents headings={headings} />
-            )
-          }
-        </p.div>
+            </p.div>
+          )
+        }
       </HStack>
     </BlogPost>
   </ContentContainer>
