@@ -1,0 +1,29 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { ContentContainer } from "@/components/common/ContentContainer";
+import PostCard from "@/components/PostCard.astro";
+import { type Post } from "@/type";
+import { Grid, styled as p } from "@styled-system/jsx";
+
+const posts = (await getCollection("post"))
+  .map((product) => {
+    return product.data as Post;
+  })
+  .sort((a, b) => b.createdAt.valueOf() - a.createdAt.valueOf());
+---
+
+<BaseLayout>
+  <ContentContainer widthLimit>
+    <Grid
+      gridTemplateColumns={{
+        base: "repeat(1, 1fr)",
+        sm: "repeat(2, 1fr)",
+        md: "repeat(3, 1fr)",
+      }}
+      gap="4"
+    >
+      {posts.map((post) => <PostCard {...post} />)}
+    </Grid>
+  </ContentContainer>
+</BaseLayout>
