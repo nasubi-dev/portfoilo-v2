@@ -1,8 +1,11 @@
 ---
 import FormattedDate from "@/components/FormattedDate.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
-import { css } from "@styled-system/css";
+import TagsList from "@/components/TagsList.astro";
 import type { Heading, Product, Post } from "@/type";
+import { styled as p, HStack } from "@styled-system/jsx";
+import { css } from "@styled-system/css";
+import { R2_BUCKET } from "@/consts";
 
 type Props =
   | (Product & {
@@ -27,25 +30,91 @@ const {
   thumbnail = null,
   icon = null,
 } = Astro.props;
+
+const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
+  ?.replace(/!\[\[/g, "")
+  .replace(/\]\]/g, "");
 ---
 
-<div class={css({ width: "100%" })}>
-  <div>
-    <div class="date">
-      <FormattedDate date={createdAt} />
+<p.div width="100%">
+  <p.div
+    display="flex"
+    flexDirection="column"
+    justifyItems="center"
+    alignItems="center"
+    gap="4"
+    marginBottom="8"
+  >
+    {
+      thumbnail ? (
+        <p.img
+          src={`${R2_BUCKET}/${replaceThumbnail}`}
+          alt={title}
+          width="100%"
+          aspectRatio="16/9"
+          objectFit="cover"
+          borderRadius="lg"
+        />
+      ) : (
+        <p.div
+          inset={0}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          fontSize={{ base: "8rem", sm: "16rem" }}
+          width="100%"
+          height="100%"
+          objectFit="cover"
+        >
+          {icon ?? "🍆"}
+        </p.div>
+      )
+    }
+
+    <HStack gap="4" fontSize="sm" color="gray.600">
+      <p.div>
+        公開日: <FormattedDate date={createdAt} />
+      </p.div>
       {
         updatedAt && (
-          <div class="last-updated-on">
-            Last updated on <FormattedDate date={updatedAt} />
-          </div>
+          <p.div>
+            更新日: <FormattedDate date={updatedAt} />
+          </p.div>
         )
       }
-    </div>
-    <h1>{title}</h1>
-    <hr />
-  </div>
+    </HStack>
 
-  <!-- 目次の追加 -->
-  {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+    <p.div justifySelf="start">
+      <TagsList tags={tags} />
+    </p.div>
+
+    <p.h1 fontSize="3xl" fontWeight="bold" lineHeight="tight">
+      {title}
+    </p.h1>
+
+    {
+      description && (
+        <p.p fontSize="lg" color="gray.700" maxWidth="600px">
+          {description}
+        </p.p>
+      )
+    }
+  </p.div>
+
+  <p.div
+    width="100%"
+    height="2px"
+    backgroundColor="nsb.text"
+    marginY="4"
+    borderRadius="full"
+  />
+
+  <p.div
+    display={{ base: "block", md: "none" }}
+    marginBottom="4"
+  >
+    {headings && headings.length > 0 && <TableOfContents headings={headings} />}
+  </p.div>
+
   <slot />
-</div>
+</p.div>

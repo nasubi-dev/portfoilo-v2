@@ -1,0 +1,63 @@
+---
+import { styled as p } from "@styled-system/jsx";
+
+type Props = {
+  tags: string[] | null;
+};
+
+const { tags } = Astro.props;
+---
+
+{
+  tags && (
+    <p.div
+      display="flex"
+      flexWrap="nowrap"
+      gap="0.5rem"
+      marginBottom="0.75rem"
+      overflow="hidden"
+      textOverflow="ellipsis"
+      whiteSpace="nowrap"
+      maxWidth="100%"
+    >
+      {(() => {
+        // タグの名前の長さに基づいて表示するタグ数を計算
+        const avgTagLength =
+          tags.reduce((sum, tag) => sum + tag.length, 0) / tags.length;
+        let visibleTagCount = 3; // デフォルト表示数
+
+        // タグの平均文字数に応じて表示数を調整
+        if (avgTagLength > 10) visibleTagCount = 1;
+        else if (avgTagLength > 3) visibleTagCount = 2;
+
+        return (
+          <>
+            {tags.slice(0, visibleTagCount).map((tag) => (
+              <p.span
+                fontSize="0.75rem"
+                padding="0.2rem 0.5rem"
+                background="nsb.secondary"
+                borderRadius="4px"
+                title={tag}
+              >
+                {"#" + tag}
+              </p.span>
+            ))}
+            {tags.length > visibleTagCount && (
+              <p.span
+                fontSize="0.75rem"
+                padding="0.2rem 0.5rem"
+                background="nsb.secondary"
+                borderRadius="4px"
+                whiteSpace="nowrap"
+                title={`${tags.length - visibleTagCount}個の追加タグ: ${tags.slice(visibleTagCount).join(", ")}`}
+              >
+                {`+${tags.length - visibleTagCount}`}
+              </p.span>
+            )}
+          </>
+        );
+      })()}
+    </p.div>
+  )
+}
