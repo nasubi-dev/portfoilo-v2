@@ -1,13 +1,15 @@
 ---
 id: WhlauWmnUJzs0J63ltQjV
-slug: second-post
-title: second-post
+slug: wakaba-hackaichi2024
+title: wakaba - HackAichi2024
 author: nasubi
 description: 
-tags: 
+tags:
+  - react
+  - cloudflare
 createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
-thumbnail:
+thumbnail: "![[wakaba-screenshot.webp]]"
 ---
 ## Another heading
 test hoge

@@ -18,7 +18,14 @@ const products = productsCollection
 
 <BaseLayout>
   <ContentContainer widthLimit>
-    <Grid>
+    <Grid
+      gridTemplateColumns={{
+        base: "repeat(1, 1fr)",
+        sm: "repeat(2, 1fr)",
+        md: "repeat(2, 1fr)",
+      }}
+      gap="4"
+    >
       {products.map((product) => <ProductCard {...product} />)}
     </Grid>
   </ContentContainer>

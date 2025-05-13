@@ -1,13 +1,15 @@
 ---
 id: Rimb8LWXEAAUEbp4dYS3T
-slug: first-post
-title: first-post
+slug: fookeys
+title: fookeys
 author: nasubi
 description: 
-tags: []
+tags:
+  - vue
+  - Firebase
 createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
-thumbnail:
+thumbnail: "![[メインビジュアル.webp]]"
 ---
 
 ![[nasubi-new.webp]]
