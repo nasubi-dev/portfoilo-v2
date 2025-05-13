@@ -50,18 +50,20 @@ const {
     <p.div width="100%" paddingTop="75%" position="relative" overflow="hidden">
       {
         icon ? (
-          // iconのアイコンを表示 中央に配置
-          <p.img
-            src={`${R2_BUCKET}/${icon}`}
-            alt={title}
+          <p.div
             position="absolute"
-            top="50%"
-            left="50%"
+            transform="translate(0%, -10%)"
+            inset={0}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            fontSize="8rem"
             width="100%"
             height="100%"
             objectFit="cover"
-            transform="translate(-50%, -50%)"
-            />
+          >
+            {icon}
+          </p.div>
         ) : (
           <p.img
             src="https://content.nasubi.dev/assets/nasubi-new.webp"
