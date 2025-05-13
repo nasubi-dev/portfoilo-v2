@@ -65,16 +65,20 @@ const {
             {icon}
           </p.div>
         ) : (
-          <p.img
-            src="https://content.nasubi.dev/assets/nasubi-new.webp"
-            alt={title}
+          <p.div
             position="absolute"
-            top="0"
-            left="0"
+            transform="translate(0%, -10%)"
+            inset={0}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            fontSize="8rem"
             width="100%"
             height="100%"
             objectFit="cover"
-          />
+          >
+            {"🍆"}
+          </p.div>
         )
       }
     </p.div>
