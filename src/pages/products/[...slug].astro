@@ -5,6 +5,8 @@ import BlogPost from "@/layouts/BlogPost.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { ContentContainer } from "@/components/common/ContentContainer";
 import { render } from "astro:content";
+import TableOfContents from "@/components/TableOfContents.astro";
+import { styled as p, VStack, HStack } from "@styled-system/jsx";
 
 export async function getStaticPaths() {
   const posts = await getCollection("products");
@@ -22,7 +24,18 @@ const { Content, headings } = await render(post);
 <BaseLayout>
   <ContentContainer widthLimit>
     <BlogPost headings={headings} {...post.data}>
-      <Content />
+      <HStack alignItems="flex-start" gap="4">
+        <p.div flexGrow={1} width="100%" padding="4">
+          <Content />
+        </p.div>
+        <p.div display={{ base: "none", md: "block" }} marginBottom="4">
+          {
+            headings && headings.length > 0 && (
+              <TableOfContents headings={headings} />
+            )
+          }
+        </p.div>
+      </HStack>
     </BlogPost>
   </ContentContainer>
 </BaseLayout>

@@ -13,7 +13,7 @@ export const cvaContentContainer = cva({
   variants: {
     widthLimit: {
       true: {
-        maxW: "1200px",
+        maxW: "1300px",
         mx: "auto",
       },
     },
