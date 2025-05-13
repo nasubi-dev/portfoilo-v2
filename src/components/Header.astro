@@ -10,14 +10,17 @@ import SearchIcon from "../../public/MdiMagnify.svg";
 import { SearchModal } from "@/components/SearchModal.tsx";
 
 // URLのパスを取得 (https://nasubi.dev/products/ -> products)
+// https://nasubi.dev/products/test -> products/test
+// 末尾の/を削除
 const currentPath = new URL(Astro.request.url).pathname
-  .replace(/^\//, "")
   .replace(/\/$/, "")
-  .split("/")[0]
-  .replace(/-/g, " ");
+  .split("/")
+  .slice(1)
+  .join("/");
 ---
 
 <header>
+  {currentPath}
   <nav class={css({ margin: { base: "20px", md: "30px" } })}>
     <HStack
       width="calc(100%)"
