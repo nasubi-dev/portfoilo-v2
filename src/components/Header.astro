@@ -8,6 +8,13 @@ import TwitterIcon from "../../public/MdiTwitter.svg";
 import GithubIcon from "../../public/MdiGithub.svg";
 import SearchIcon from "../../public/MdiMagnify.svg";
 import { SearchModal } from "@/components/SearchModal.tsx";
+
+// URLのパスを取得 (https://nasubi.dev/products/ -> products)
+const currentPath = new URL(Astro.request.url).pathname
+  .replace(/^\//, "")
+  .replace(/\/$/, "")
+  .split("/")[0]
+  .replace(/-/g, " ");
 ---
 
 <header>
@@ -28,19 +35,64 @@ import { SearchModal } from "@/components/SearchModal.tsx";
       borderColor="nsb.bg-on"
       boxShadow="0 0 10px rgba(0, 0, 0, 0.1)"
     >
-      <p.a href="/" fontSize="lg" fontWeight="bold" sm={{ fontSize: "2xl" }}>
+      <!-- currentPathがhrefと一致していたら無効 -->
+      <p.a
+        href="/"
+        fontSize="lg"
+        fontWeight="bold"
+        sm={{ fontSize: "2xl" }}
+        aria-disabled={currentPath === "" ? "true" : "false"}
+        data-active={currentPath === "" ? "true" : "false"}
+        css={{
+          "&[data-active=true]": {
+            pointerEvents: "none",
+            opacity: "0.7",
+            cursor: "default",
+          },
+        }}
+      >
         {SITE_TITLE}
       </p.a>
 
       <p.div visibility="collapse" ml={"auto"} md={{ visibility: "visible" }}>
         <HStack gap="1em">
-          <p.a href="/posts/">
+          <p.a
+            href="/posts/"
+            aria-disabled={currentPath === "posts" ? "true" : "false"}
+            data-active={currentPath === "posts" ? "true" : "false"}
+            css={{
+              "&[data-active=true]": {
+                pointerEvents: "none",
+                opacity: "0.7",
+              },
+            }}
+          >
             <Button variant="light">Posts</Button>
           </p.a>
-          <p.a href="/products/">
+          <p.a
+            href="/products/"
+            aria-disabled={currentPath === "products" ? "true" : "false"}
+            data-active={currentPath === "products" ? "true" : "false"}
+            css={{
+              "&[data-active=true]": {
+                pointerEvents: "none",
+                opacity: "0.7",
+              },
+            }}
+          >
             <Button variant="light">Products</Button>
           </p.a>
-          <p.a href="/about/">
+          <p.a
+            href="/about/"
+            aria-disabled={currentPath === "about" ? "true" : "false"}
+            data-active={currentPath === "about" ? "true" : "false"}
+            css={{
+              "&[data-active=true]": {
+                pointerEvents: "none",
+                opacity: "0.7",
+              },
+            }}
+          >
             <Button variant="light">About</Button>
           </p.a>
         </HStack>
