@@ -7,6 +7,7 @@ import { ContentContainer } from "@/components/common/ContentContainer";
 import { render } from "astro:content";
 import TableOfContents from "@/components/TableOfContents.astro";
 import { styled as p, VStack, HStack } from "@styled-system/jsx";
+import { css } from "@styled-system/css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("products");
@@ -25,12 +26,12 @@ const { Content, headings } = await render(post);
   <ContentContainer widthLimit>
     <BlogPost headings={headings} {...post.data}>
       <HStack alignItems="flex-start" gap="4">
-        <p.div flexGrow={1} width="100%" padding="4">
+        <p.div flexGrow="1" width="100%" padding="4">
           <Content />
         </p.div>
         {
           headings && headings.length > 0 && (
-            <p.div display={{ base: "none", lg:"block" }} marginBottom="4">
+            <p.div display={{ base: "none", lg: "block" }} marginBottom="4">
               <TableOfContents headings={headings} />
             </p.div>
           )

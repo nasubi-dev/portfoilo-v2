@@ -44,6 +44,31 @@ export default defineConfig({
       fontFamily: "var(--noto-sans-jp)",
       scrollBehavior: "smooth",
     },
+    "h1, h2, h3, h4, h5, h6": {
+      fontWeight: "bold",
+    },
+    h1: {
+      fontSize: "4xl",
+    },
+    h2: {
+      fontSize: "3xl",
+    },
+    h3: {
+      fontSize: "2xl",
+    },
+    h4: {
+      fontSize: "xl",
+    },
+    h5: {
+      fontSize: "lg",
+    },
+    h6: {
+      fontSize: "md",
+    },
+    p: {
+      fontSize: "1.1rem",
+      lineHeight: "2.2rem",
+    },
   },
 
   // dark mode settings

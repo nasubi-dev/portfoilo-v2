@@ -6,13 +6,18 @@ type Props = {
   headings: Heading[];
 };
 const { headings } = Astro.props;
+
+//  h5,h6は無視する?
+const filteredHeadings = headings.filter((heading) => {
+  return heading.depth >= 2 && heading.depth <= 4;
+});
 ---
 
 <p.div padding={4} background="nsb.bg-on" borderRadius="lg" minWidth="300px">
   {
     headings.length > 1 && (
       <nav>
-        <h2>目次</h2>
+        <h4>目次</h4>
         <ul>
           {headings.map((heading) => (
             <li>
