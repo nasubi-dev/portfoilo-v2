@@ -32,9 +32,15 @@ export default defineConfig({
       fontWeight: "400",
       src: "url('/fonts/TwitterColorEmoji-SVGinOT.ttf') format('truetype')",
     },
+    "UDEV Gothic NF": {
+      fontStyle: "normal",
+      fontWeight: "400",
+      src: "url('/fonts/UDEVGothicNF-Regular.ttf') format('truetype')",
+    },
   },
   globalVars: {
     "--noto-sans-jp": " twemoji, 'Noto Sans JP', sans-serif",
+    "--udev-gothic-nf": "'UDEV Gothic NF', monospace",
   },
   globalCss: {
     "html, body": {
@@ -69,6 +75,16 @@ export default defineConfig({
       fontSize: "1.1rem",
       lineHeight: "2.2rem",
     },
+    code: {
+      fontFamily: "var(--udev-gothic-nf)",
+      fontSize: "1.1rem",
+      fontWeight: "bold",
+      // lineHeight: "2.2rem",
+      // bg: "nsb.bg-on",
+      // borderRadius: "4px",
+      // px: "2",
+      // py: "1",
+    },
   },
 
   // dark mode settings
@@ -83,6 +99,9 @@ export default defineConfig({
         fonts: {
           sans: {
             value: "var(--noto-sans-jp), sans-serif",
+          },
+          mono: {
+            value: "monospace",
           },
         },
         colors: {
