@@ -31,7 +31,12 @@ const { Content, headings } = await render(post);
         </p.div>
         {
           headings && headings.length > 0 && (
-            <p.div display={{ base: "none", lg: "block" }} marginBottom="4">
+            <p.div
+              display={{ base: "none", lg: "block" }}
+              marginBottom="4"
+              position="sticky"
+              top="4"
+            >
               <TableOfContents headings={headings} />
             </p.div>
           )
