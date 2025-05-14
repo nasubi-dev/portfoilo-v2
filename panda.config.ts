@@ -75,11 +75,16 @@ export default defineConfig({
       fontSize: "1.1rem",
       lineHeight: "2.2rem",
     },
-    // codeのフォントを変更(preの下であれば除外)
+    kbd: {
+      fontFamily: "var(--udev-gothic-nf)",
+      bg: "nsb.bg-on",
+      borderRadius: "sm",
+      px: "2",
+      py: "0.5",
+    },
     code: {
       fontFamily: "var(--udev-gothic-nf)",
       bg: "nsb.bg-on",
-      fontWeight: "bold",
       borderRadius: "sm",
       px: "2",
       py: "0.5",
