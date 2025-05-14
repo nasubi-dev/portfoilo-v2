@@ -63,7 +63,7 @@ function remarkEmbedLinks() {
           ? node.children[0].value
           : "";
 
-      // YouTube
+      // YouTubeの動画
       if (
         url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)
       ) {
@@ -123,8 +123,12 @@ function remarkEmbedLinks() {
           // Zenn, Qiitaなど特定サイトに対するクラス名
           let siteClass = "external";
           if (url.includes("zenn.dev")) siteClass = "zenn";
-          else if (url.includes("qiita.com")) siteClass = "qiita";
-          else if (isInternal) siteClass = "internal";
+          if (url.includes("qiita.com")) siteClass = "qiita";
+          if (url.includes("github.com")) siteClass = "github";
+          if (url.includes("note.com")) siteClass = "note";
+          if (url.includes("soundncloud.com")) siteClass = "soundcloud";
+          if (url.includes("spotify.com")) siteClass = "spotify";
+          if (isInternal) siteClass = "internal";
 
           node.type = "html";
           node.value = `<div class="link-card ${siteClass}">
@@ -277,6 +281,7 @@ function remarkWikiLinks() {
 // https://astro.build/config
 export default defineConfig({
   site: "https://nasubi.dev",
+  prefetch: true,
   integrations: [react(), sitemap()],
   image: {
     remotePatterns: [
