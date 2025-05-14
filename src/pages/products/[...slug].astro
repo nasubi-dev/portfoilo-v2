@@ -7,6 +7,9 @@ import { ContentContainer } from "@/components/common/ContentContainer";
 import { render } from "astro:content";
 import TableOfContents from "@/components/TableOfContents.astro";
 import { styled as p, VStack, HStack } from "@styled-system/jsx";
+import { Button } from "@/components/common/Button";
+import TwitterIcon from "../../../public/MdiTwitter.svg";
+import ClipboardIcon from "../../../public/MdiClipboardOutline.svg";
 import { css } from "@styled-system/css";
 
 export async function getStaticPaths() {
@@ -20,6 +23,7 @@ type Props = CollectionEntry<"products">;
 
 const post = Astro.props;
 const { Content, headings } = await render(post);
+const shareUrl = `https://nasubi.dev/products/${post.data.slug}`;
 ---
 
 <BaseLayout>
@@ -29,18 +33,43 @@ const { Content, headings } = await render(post);
         <p.div flexGrow="1" width="100%" padding="4">
           <Content />
         </p.div>
-        {
-          headings && headings.length > 0 && (
-            <p.div
-              display={{ base: "none", lg: "block" }}
-              marginBottom="4"
-              position="sticky"
-              top="4"
-            >
+        <VStack
+          display={{ base: "none", lg: "block" }}
+          marginBottom="4"
+          position="sticky"
+          top="4"
+        >
+          {
+            headings && headings.length > 0 && (
               <TableOfContents headings={headings} />
-            </p.div>
-          )
-        }
+            )
+          }
+          <HStack paddingTop="4" gap="4">
+            <Button
+              variant="light"
+              rounded="full"
+              borderWidth="1px"
+              borderColor="nsb.bg-on"
+            >
+              <ClipboardIcon width="20px" height="20px" />
+            </Button>
+            <p.a
+              href={`https://twitter.com/share?url=${encodeURIComponent(
+                shareUrl
+              )}&text=${encodeURIComponent(post.data.title)}`}
+              target="_blank"
+            >
+              <Button
+                variant="light"
+                rounded="full"
+                borderWidth="1px"
+                borderColor="nsb.bg-on"
+              >
+                <TwitterIcon width="20px" height="20px" />
+              </Button>
+            </p.a>
+          </HStack>
+        </VStack>
       </HStack>
     </BlogPost>
   </ContentContainer>

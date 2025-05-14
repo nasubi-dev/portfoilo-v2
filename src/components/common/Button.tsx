@@ -58,6 +58,18 @@ export const cvaButton = cva({
         fontSize: "md",
       },
     },
+    rounded: {
+      full: {
+        rounded: "full",
+        aspectRatio: "1",
+      },
+      none: {
+        rounded: "none",
+      },
+      md: {
+        rounded: "md",
+      },
+    },
     animateOnHover: {
       true: {
         "& svg": {
