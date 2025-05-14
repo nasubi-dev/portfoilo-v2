@@ -7,24 +7,55 @@ type Props = {
 };
 const { headings } = Astro.props;
 
-//  h5,h6は無視する?
+//  h5,h6は無視する
 const filteredHeadings = headings.filter((heading) => {
   return heading.depth >= 2 && heading.depth <= 4;
 });
+
+// 目次をスクロール可能にするかどうかのしきい値
+const SCROLL_THRESHOLD = 15;
+const shouldScroll = filteredHeadings.length > SCROLL_THRESHOLD;
+const maxHeight = shouldScroll ? "300px" : "auto";
 ---
 
 <p.div padding={4} background="nsb.bg-on" borderRadius="lg" minWidth="300px">
   {
-    headings.length > 1 && (
+    filteredHeadings.length > 1 && (
       <nav>
         <h4>目次</h4>
-        <ul>
-          {headings.map((heading) => (
-            <li>
-              <a href={`#${heading.slug}`}>{heading.text}</a>
-            </li>
-          ))}
-        </ul>
+        <p.div
+          maxHeight={maxHeight}
+          overflowY={shouldScroll ? "auto" : "visible"}
+          paddingRight={shouldScroll ? "8px" : "0px"}
+          css={{
+            scrollbarWidth: "thin",
+            scrollbarColor: "rgba(155, 155, 155, 0.5) transparent",
+            "&::-webkit-scrollbar": {
+              width: "6px",
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "transparent",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "rgba(155, 155, 155, 0.5)",
+              borderRadius: "6px",
+              border: "none",
+            },
+          }}
+        >
+          <ul>
+            {filteredHeadings.map((heading) => (
+              <li>
+                <p.a
+                  href={`#${heading.slug}`}
+                  _hover={{ textDecoration: "underline" }}
+                >
+                  {heading.text}
+                </p.a>
+              </li>
+            ))}
+          </ul>
+        </p.div>
       </nav>
     )
   }
