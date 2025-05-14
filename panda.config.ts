@@ -88,10 +88,35 @@ export default defineConfig({
       bg: "none",
       px: "0",
     },
-    "pre": {
+    pre: {
+      width: "100%",
+      minWidth: "500px",
       borderRadius: "md",
       px: "5",
       py: "5",
+    },
+    table: {
+      width: "100%",
+      minWidth: "500px",
+      borderSpacing: "0",
+      borderRadius: "md",
+
+    },
+    thead: {
+      textAlign: "center",
+    },
+    "th, td": {
+      border: "1px solid #eaeaea",
+      padding: "1rem",
+      fontSize: "1.1rem",
+      lineHeight: "2.2rem",
+    },
+    th: {
+      fontWeight: "bold",
+      bg: "nsb.bg-on",
+      color: "nsb.text",
+      fontSize: "1.2rem",
+      lineHeight: "2.4rem",
     },
   },
 
