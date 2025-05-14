@@ -80,12 +80,18 @@ export default defineConfig({
       fontFamily: "var(--udev-gothic-nf)",
       bg: "nsb.bg-on",
       fontWeight: "bold",
-      borderRadius: "4px",
+      borderRadius: "sm",
       px: "2",
       py: "0.5",
     },
     "pre code": {
       bg: "none",
+      px: "0",
+    },
+    "pre": {
+      borderRadius: "md",
+      px: "5",
+      py: "5",
     },
   },
 
