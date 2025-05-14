@@ -156,10 +156,6 @@ export default defineConfig({
     "li > ul, li > ol": {
       marginY: "0.5rem",
     },
-    "input[type='checkbox']": {
-      marginRight: "0.5rem",
-      accentColor: "nsb.primary",
-    },
     "ul.contains-task-list": {
       listStyleType: "none",
       paddingLeft: "0",
