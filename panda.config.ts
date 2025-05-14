@@ -100,7 +100,6 @@ export default defineConfig({
       minWidth: "500px",
       borderSpacing: "0",
       borderRadius: "md",
-
     },
     thead: {
       textAlign: "center",
@@ -117,6 +116,48 @@ export default defineConfig({
       color: "nsb.text",
       fontSize: "1.2rem",
       lineHeight: "2.4rem",
+    },
+    "ul, ol": {
+      paddingLeft: "1.5rem",
+      marginY: "1rem",
+      fontSize: "1.1rem",
+      lineHeight: "1.3rem",
+    },
+    ul: {
+      listStyleType: "disc",
+    },
+    "ul ul": {
+      listStyleType: "circle",
+      marginY: "0.5rem",
+    },
+    "ul ul ul": {
+      listStyleType: "square",
+      marginY: "0.5rem",
+    },
+    ol: {
+      listStyleType: "decimal",
+    },
+    "ol ol": {
+      listStyleType: "lower-alpha",
+      marginY: "0.5rem",
+    },
+    "ol ol ol": {
+      listStyleType: "lower-roman",
+      marginY: "0.5rem",
+    },
+    li: {
+      marginY: "0.5rem",
+    },
+    "li > ul, li > ol": {
+      marginY: "0.5rem",
+    },
+    "input[type='checkbox']": {
+      marginRight: "0.5rem",
+      accentColor: "nsb.primary",
+    },
+    "ul.contains-task-list": {
+      listStyleType: "none",
+      paddingLeft: "0",
     },
   },
 
