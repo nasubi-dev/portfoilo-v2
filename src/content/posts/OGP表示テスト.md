@@ -59,5 +59,10 @@ https://www.youtube.com/watch?v=H0aXJKuXF38
 
 https://note.com/tikumin/n/n23c47148a05d
 
+https://open.spotify.com/intl-ja/track/1poGez6IaTb1gtJxkXdlb8?si=c5590f0715c34d42
+
 ## インラインのリンク
-たとえばこのテキストの中に https://soundcloud.com/rayvolpemusic/laserbeam があるとこのように表示される｡
+たとえばこのテキストの中に https://soundcloud.com/rayvolpemusic/laserbeam があるとこのように表示されるよ｡
+
+いい感じ
+

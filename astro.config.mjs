@@ -54,7 +54,39 @@ function remarkEmbedLinks() {
   return async (tree) => {
     const promises = [];
 
-    // @ts-ignore
+    /**
+     * URLのタイプを判定する関数
+     * @param {string} url - 判定するURL
+     * @returns {{type: string, match: RegExpMatchArray | null}} - URLタイプと正規表現のマッチ結果
+     */
+    const getUrlType = (url) => {
+      // YouTubeの動画URLかどうか判定
+      const youtubeMatch = url.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/
+      );
+
+      if (youtubeMatch) {
+        return { type: "youtube", match: youtubeMatch };
+      }
+
+      if (!url.startsWith("http")) {
+        return { type: "skip", match: null };
+      }
+
+      // 各種サイトの判定
+      if (url.includes("spotify.com")) return { type: "spotify", match: null };
+      if (url.includes("zenn.dev")) return { type: "zenn", match: null };
+      if (url.includes("qiita.com")) return { type: "qiita", match: null };
+      if (url.includes("github.com")) return { type: "github", match: null };
+      if (url.includes("note.com")) return { type: "note", match: null };
+      if (url.includes("soundcloud.com"))
+        return { type: "soundcloud", match: null };
+      if (url.includes("nasubi.dev")) return { type: "internal", match: null };
+
+      // それ以外は外部リンク
+      return { type: "other", match: null };
+    };
+
     visit(tree, "link", (node) => {
       const url = node.url;
 
@@ -64,74 +96,113 @@ function remarkEmbedLinks() {
           ? node.children[0].value
           : "";
 
-      // URLのタイプを判定
-      let urlType = "other";
-      const youtubeMatch = url.match(
-        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/
-      );
+      // URLタイプを判定
+      const { type: urlType, match: youtubeMatch } = getUrlType(url);
 
-      if (youtubeMatch) {
-        urlType = "youtube";
-      } else if (!url.startsWith("http")) {
-        // HTTPで始まらないリンクはスキップ
-        return;
-      } else if (url.includes("spotify.com")) {
-        urlType = "spotify";
-      } else if (url.includes("zenn.dev")) {
-        urlType = "zenn";
-      } else if (url.includes("qiita.com")) {
-        urlType = "qiita";
-      } else if (url.includes("github.com")) {
-        urlType = "github";
-      } else if (url.includes("note.com")) {
-        urlType = "note";
-      } else if (url.includes("soundcloud.com")) {
-        urlType = "soundcloud";
-      } else if (url.includes("nasubi.dev")) {
-        urlType = "internal";
-      }
+      // HTTPで始まらないリンクはスキップ
+      if (urlType === "skip") return;
+
+      /**
+       * キャッシュを考慮してOGPデータを取得する関数
+       * @param {string} url - OGPを取得するURL
+       * @returns {Promise<any>} - OGPデータ
+       */
+      const getOgpWithCache = async (url) => {
+        if (cache.has(url)) {
+          return cache.get(url);
+        } else {
+          const ogpData = await fetchOGP(url);
+          cache.set(url, ogpData);
+          return ogpData;
+        }
+      };
+
+      /**
+       * HTML要素の生成関数群
+       */
+      const createHtml = {
+        // YouTubeの埋め込みを生成
+        youtube: (youtubeId, linkTitle) => `<div class="youtube-embed">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/${youtubeId}"
+            title="${linkTitle || "YouTube video"}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>`,
+
+        // Spotifyの埋め込みを生成
+        spotify: (url, title) => `<div class="spotify-embed">
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/${url.split("/").pop()}?utm_source=generator&theme=0"
+            width="560"
+            height="315"
+            frameBorder="0"
+            allowfullscreen=""
+            allow="autoplay;
+            clipboard-write;
+            encrypted-media;
+            fullscreen;
+            picture-in-picture"
+            loading="lazy">
+          </iframe>
+        </div>`,
+
+        // グリッドレイアウトのリンクカードを生成
+        gridCard: (url, title, site, siteClass, ogpData) => {
+          const imageRatioClass = ogpData.image ? "link-card-with-image" : "";
+
+          return `<div class="link-card ${siteClass} link-card-grid ${imageRatioClass}">
+            <a href="${url}" target="_blank">
+              <div class="link-card-grid-container">
+                <div class="link-card-image-container">
+                  ${
+                    ogpData.image
+                      ? `<img src="${ogpData.image}" alt="${title}" loading="lazy" onload="this.naturalWidth > this.naturalHeight * 1.2 ? this.parentNode.parentNode.classList.add('wide-image') : ''" />`
+                      : `<div class="no-image"></div>`
+                  }
+                </div>
+                <div class="link-card-content">
+                  <h4>${title}</h4>
+                  <span class="link-card-site">${site}</span>
+                </div>
+              </div>
+            </a>
+          </div>`;
+        },
+
+        // 標準のリンクカードを生成
+        standardCard: (url, title, site, siteClass, imageHtml, isInternal) =>
+          `<div class="link-card ${siteClass}">
+            <a href="${url}" ${!isInternal ? 'target="_blank"' : ""}>
+              ${imageHtml}
+              <div class="link-card-content">
+                <h4>${title}</h4>
+                <span class="link-card-site">${site}</span>
+              </div>
+            </a>
+          </div>`,
+      };
 
       switch (urlType) {
         case "youtube": {
           // YouTubeの動画
-          const youtubeId = youtubeMatch[1];
+          const youtubeId = youtubeMatch?.[1] || "";
           node.type = "html";
-          node.value = `<div class="youtube-embed">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/${youtubeId}"
-              title="${linkTitle || "YouTube video"}"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>`;
+          node.value = createHtml.youtube(youtubeId, linkTitle);
           break;
         }
         case "spotify": {
           // Spotifyの埋め込み
           const promise = (async () => {
-            let ogpData;
-            if (cache.has(url)) {
-              ogpData = cache.get(url);
-            } else {
-              ogpData = await fetchOGP(url);
-              cache.set(url, ogpData);
-            }
+            const ogpData = await getOgpWithCache(url);
             const title = ogpData.title || node.children[0]?.value || url;
             node.type = "html";
-            node.value = `<div class="spotify-embed">
-              <iframe
-                src="${url.replace("open.spotify.com", "embed.spotify.com")}"
-                width="300"
-                height="380"
-                frameborder="0"
-                allowtransparency="true"
-                allow="encrypted-media"
-                title="${title || "Spotify Embed"}">
-              </iframe>
-            </div>`;
+            node.value = createHtml.spotify(url, title);
           })();
           promises.push(promise);
           break;
@@ -146,13 +217,7 @@ function remarkEmbedLinks() {
         case "other": {
           // その他のリンク（OGP取得）
           const promise = (async () => {
-            let ogpData;
-            if (cache.has(url)) {
-              ogpData = cache.get(url);
-            } else {
-              ogpData = await fetchOGP(url);
-              cache.set(url, ogpData);
-            }
+            const ogpData = await getOgpWithCache(url);
 
             const title = ogpData.title || node.children[0]?.value || url;
             const site = ogpData.site_name;
@@ -169,46 +234,30 @@ function remarkEmbedLinks() {
 
             // Zenn, Qiita、または画像のあるカードの場合はグリッドレイアウトを使用
             if (urlType === "zenn" || urlType === "qiita" || ogpData.image) {
-              // 画像がある場合のみ、比率判定用のクラスを追加
-              const imageRatioClass = ogpData.image
-                ? "link-card-with-image"
-                : "";
-
-              node.value = `<div class="link-card ${siteClass} link-card-grid ${imageRatioClass}">
-                <a href="${url}" target="_blank">
-                  <div class="link-card-grid-container">
-                    <div class="link-card-image-container">
-                      ${
-                        ogpData.image
-                          ? `<img src="${ogpData.image}" alt="${title}" loading="lazy" onload="this.naturalWidth > this.naturalHeight * 1.2 ? this.parentNode.parentNode.classList.add('wide-image') : ''" />`
-                          : `<div class="no-image"></div>`
-                      }
-                    </div>
-                    <div class="link-card-content">
-                      <h4>${title}</h4>
-                      <span class="link-card-site">${site}</span>
-                    </div>
-                  </div>
-                </a>
-              </div>`;
+              node.value = createHtml.gridCard(
+                url,
+                title,
+                site,
+                siteClass,
+                ogpData
+              );
             } else {
               // 他のサイトは通常のレイアウト
-              node.value = `<div class="link-card ${siteClass}">
-                <a href="${url}" ${!isInternal ? 'target="_blank"' : ""}>
-                  ${imageHtml}
-                  <div class="link-card-content">
-                    <h4>${title}</h4>
-                    <span class="link-card-site">${site}</span>
-                  </div>
-                </a>
-              </div>`;
+              node.value = createHtml.standardCard(
+                url,
+                title,
+                site,
+                siteClass,
+                imageHtml,
+                isInternal
+              );
             }
           })();
           promises.push(promise);
           break;
         }
       }
-    })();
+    });
 
     await Promise.all(promises);
   };

@@ -23,7 +23,7 @@
 .link-card {
   margin: 1.5rem 0;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
   overflow: hidden;
   width: fit-content;
   height: auto;
@@ -33,13 +33,11 @@
   display: flex;
   flex-direction: row;
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+    background-color 0.1s ease,
 }
-
+/* 背景を少し暗く */
 .link-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* グリッドレイアウト - デフォルトスタイル */
@@ -83,3 +81,10 @@
   font-size: 0.8rem;
   color: #999;
 }
+
+/* .spotify-embed {
+  width: 500px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+} */
