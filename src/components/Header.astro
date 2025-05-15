@@ -53,7 +53,7 @@ const currentPath = new URL(Astro.request.url).pathname
         {SITE_TITLE}
       </p.a>
 
-      <p.div visibility="collapse" ml={"auto"} md={{ visibility: "visible" }}>
+      <p.div visibility="collapse" ml={"auto"} sm={{ visibility: "visible" }}>
         <HStack gap="1em">
           <p.a
             href="/posts/"
@@ -96,7 +96,7 @@ const currentPath = new URL(Astro.request.url).pathname
           </p.a>
         </HStack>
       </p.div>
-      <p.div visibility="visible" md={{ visibility: "collapse" }} ml="auto">
+      <p.div visibility="visible" sm={{ visibility: "collapse" }} ml="auto">
         <Button variant="filled" size="md"> menu </Button>
       </p.div>
 
