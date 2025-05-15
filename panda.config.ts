@@ -181,6 +181,12 @@ export default defineConfig({
       display: "flex",
       flexDirection: "row",
       transition: "background-color 0.1s ease",
+      _sm: {
+        flexDirection: "column",
+        maxHeight: "none", // 高さ制限を解除
+        width: "100%",
+        maxWidth: "500px",
+      },
     },
     ".link-card:hover": {
       backgroundColor: "rgba(0, 0, 0, 0.05)",
@@ -190,11 +196,18 @@ export default defineConfig({
       flexDirection: "row",
       gap: "0.5rem",
       overflow: "hidden",
+      _sm: {
+        flexDirection: "column",
+      },
     },
     ".link-card-grid .link-card-image-container img": {
       width: "100%",
       height: "250px",
       objectFit: "cover",
+      _sm: {
+        height: "100%", // スモールスクリーンでは少し小さめに
+        maxHeight: "270px",
+      },
     },
     ".youtube-embed iframe": {
       width: "100%",
@@ -224,6 +237,9 @@ export default defineConfig({
       flexDirection: "column",
       justifyContent: "space-between",
       flex: "1",
+      _sm: {
+        width: "100%",
+      },
     },
     ".link-card-content h4": {
       margin: "0 0 0.5rem",
@@ -239,6 +255,10 @@ export default defineConfig({
   // dark mode settings
   conditions: {
     dark: ".dark &",
+    // レスポンシブ用ブレークポイント追加
+    sm: "@media (max-width: 640px)",
+    md: "@media (min-width: 641px) and (max-width: 768px)",
+    lg: "@media (min-width: 769px)",
   },
 
   // Useful for theme customization
