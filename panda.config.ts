@@ -160,6 +160,66 @@ export default defineConfig({
       listStyleType: "none",
       paddingLeft: "0",
     },
+    ".heading-wrapper": {
+      display: "flex",
+      alignItems: "center",
+      marginTop: "30px",
+    },
+    ".anchor-icon": {
+      marginLeft: "8px",
+    },
+    ".link-card": {
+      margin: "1.5rem 0",
+      borderRadius: "8px",
+      border: "1px solid #e0e0e0",
+      overflow: "hidden",
+      width: "fit-content",
+      height: "auto",
+      minWidth: "300px",
+      maxWidth: "1000px",
+      maxHeight: "250px",
+      display: "flex",
+      flexDirection: "row",
+      transition: "background-color 0.1s ease",
+    },
+    ".link-card:hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.05)",
+    },
+    ".link-card-grid .link-card-grid-container": {
+      display: "flex",
+      flexDirection: "row",
+      gap: "0.5rem",
+      overflow: "hidden",
+    },
+    ".link-card-grid .link-card-image-container img": {
+      width: "100%",
+      height: "250px",
+      objectFit: "cover",
+    },
+    ".link-card-grid .no-image": {
+      backgroundColor: "#f0f0f0",
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    ".link-card-content": {
+      padding: "1rem",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      flex: "1",
+    },
+    ".link-card-content h4": {
+      margin: "0 0 0.5rem",
+      fontSize: "1.1rem",
+    },
+    ".link-card-site": {
+      display: "block",
+      fontSize: "0.8rem",
+      color: "#999",
+    },
   },
 
   // dark mode settings

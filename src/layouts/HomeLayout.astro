@@ -60,23 +60,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta property="twitter:title" content={SITE_TITLE} />
     <meta property="twitter:description" content={SITE_DESCRIPTION} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
-
-    <!-- OGP画像の縦横比判定のためのスクリプト -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".ogp-image").forEach((img) => {
-          img.addEventListener("load", function () {
-            // 横長画像（横:縦 = 1.2:1以上）の場合
-            if (this.naturalWidth > this.naturalHeight * 1.2) {
-              const container = this.closest(".link-card-grid-container");
-              if (container) {
-                container.classList.add("wide-image");
-              }
-            }
-          });
-        });
-      });
-    </script>
   </head>
   <body>
     <Expanded basedOn="screen" overflowX="clip">
