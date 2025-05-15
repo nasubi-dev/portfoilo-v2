@@ -37,7 +37,7 @@ async function fetchOGP(url) {
       site_name: getMetaContent(html, "og:site_name") || new URL(url).hostname,
     };
   } catch (error) {
-    console.warn(`Failed to fetch OGP for ${url}:`, error.message);
+    console.warn(`Failed to fetch OGP for ${url}:`);
     return {
       title: "",
       description: "",
@@ -375,6 +375,7 @@ function remarkWikiLinks() {
       // 元のノードを置き換え
       if (parts.length > 0) {
         parent.children.splice(index, 1, ...parts);
+        if (index !== null) return;
         return index + parts.length;
       }
     });
