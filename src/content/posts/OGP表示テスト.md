@@ -10,7 +10,7 @@ updatedAt: 2025-05-15T02:10+09:00
 icon: 🍆
 ---
 対応状況は以下の通り
-
+test
 
 ## 各種SNS
 ### GitHub
@@ -20,6 +20,7 @@ icon: 🍆
 ユーザー
 [nasubi-dev (nasubi) · GitHub](https://github.com/nasubi-dev)
 
+aaaaaa
 ### Twitter
 投稿
 [x.com/nasubi\_dev/status/1918003847152410916](https://x.com/nasubi_dev/status/1918003847152410916)
@@ -27,6 +28,7 @@ icon: 🍆
 ユーザー
 [@nasubi_dev](https://x.com/nasubi_dev)
 ### Youtube
+なぜ反映されない
 
 動画
 [体温で動くエンジン作ってみた【スターリングエンジン】 - YouTube](https://www.youtube.com/watch?v=H0aXJKuXF38)

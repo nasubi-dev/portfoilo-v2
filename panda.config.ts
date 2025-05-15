@@ -196,6 +196,20 @@ export default defineConfig({
       height: "250px",
       objectFit: "cover",
     },
+    ".youtube-embed iframe": {
+      width: "100%",
+      height: "100%",
+      aspectRatio: "16 / 9",
+      minWidth: "300px",
+      maxWidth: "800px",
+    },
+    ".spotify-embed iframe": {
+      width: "100%",
+      height: "100%",
+      aspectRatio: "1 / 1",
+      minWidth: "300px",
+      maxWidth: "800px",
+    },
     ".link-card-grid .no-image": {
       backgroundColor: "#f0f0f0",
       width: "100%",

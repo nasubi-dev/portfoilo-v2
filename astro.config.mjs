@@ -139,8 +139,6 @@ function remarkEmbedLinks() {
           <iframe
             style="border-radius:12px"
             src="https://open.spotify.com/embed/track/${url.split("/").pop()}?utm_source=generator&theme=0"
-            width="560"
-            height="315"
             frameBorder="0"
             allowfullscreen=""
             allow="autoplay;
