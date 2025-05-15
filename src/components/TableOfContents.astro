@@ -18,9 +18,14 @@ const shouldScroll = filteredHeadings.length > SCROLL_THRESHOLD;
 const maxHeight = shouldScroll ? "300px" : "auto";
 ---
 
-<p.div padding={4} background="nsb.bg-on" borderRadius="lg" minWidth="300px">
-  {
-    filteredHeadings.length > 1 && (
+{
+  filteredHeadings.length > 0 && (
+    <p.div
+      padding={4}
+      background="nsb.bg-on"
+      borderRadius="lg"
+      minWidth="300px"
+    >
       <nav>
         <h4>目次</h4>
         <p.div
@@ -57,6 +62,6 @@ const maxHeight = shouldScroll ? "300px" : "auto";
           </ul>
         </p.div>
       </nav>
-    )
-  }
-</p.div>
+    </p.div>
+  )
+}
