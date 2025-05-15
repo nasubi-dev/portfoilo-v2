@@ -80,7 +80,7 @@ const profiles = await Promise.all(
             .map((profile) => (
               <VStack gap="4" alignItems="flex-start" paddingY="4">
                 <p.h2 fontSize="2xl" fontWeight="bold">
-                  {profile.id}
+                  {profile.id.toUpperCase()}
                 </p.h2>
                 <profile.Content />
               </VStack>

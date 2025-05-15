@@ -1,7 +1,7 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
-//Dateは2025-05-10T06:57+09:00のような形式で保存される
+//Dateは2025-05-10T06:57+09:00の形式で保存されている
 
 // 共通のスキーマを定義
 const commonSchema = z.object({
@@ -17,14 +17,14 @@ const commonSchema = z.object({
 
 const post = defineCollection({
   // 実際のディレクトリ構造に合わせて、postsディレクトリを参照するように変更
-  loader: glob({ base: "./src/content/posts", pattern: "**/*.{md}" }),
+  loader: glob({ base: "./src/content/posts", pattern: "**/*.md" }),
   schema: commonSchema.extend({
     icon: z.string().nullable(),
   }),
 });
 
 const products = defineCollection({
-  loader: glob({ base: "./src/content/products", pattern: "**/*.{md}" }),
+  loader: glob({ base: "./src/content/products", pattern: "**/*.md" }),
   schema: commonSchema.extend({
     thumbnail: z.string().nullable(),
   }),
@@ -32,7 +32,7 @@ const products = defineCollection({
 
 // プロフィール関連のマークダウンファイル用のコレクション
 const profiles = defineCollection({
-  loader: glob({ base: "./src/content/about", pattern: "*.md" }),
+  loader: glob({ base: "./src/content/about", pattern: "**/*.md" }),
 });
 
 export const collections = { post, products, profiles };

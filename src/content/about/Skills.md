@@ -12,9 +12,9 @@
 	- AWS
 - その他
 	- obsidian
-	- python
-	- c
 	- github / git
 	- figma
-	- java
 	- docker
+	- python
+	- java
+	- c
