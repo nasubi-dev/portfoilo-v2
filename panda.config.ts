@@ -219,12 +219,11 @@ export default defineConfig({
     ".spotify-embed iframe": {
       width: "100%",
       height: "100%",
-      aspectRatio: "1 / 1",
+      aspectRatio: "2/1",
       minWidth: "300px",
       maxWidth: "800px",
     },
     ".link-card-grid .no-image": {
-      backgroundColor: "#f0f0f0",
       width: "100%",
       height: "100%",
       display: "flex",
@@ -248,7 +247,7 @@ export default defineConfig({
     ".link-card-site": {
       display: "block",
       fontSize: "0.8rem",
-      color: "#999",
+      color: "nsb.text-variant",
     },
   },
 

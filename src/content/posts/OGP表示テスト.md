@@ -10,7 +10,6 @@ updatedAt: 2025-05-15T02:10+09:00
 icon: 🍆
 ---
 対応状況は以下の通り
-test
 
 ## 各種SNS
 ### GitHub
@@ -28,7 +27,6 @@ aaaaaa
 ユーザー
 [@nasubi_dev](https://x.com/nasubi_dev)
 ### Youtube
-なぜ反映されない
 
 動画
 [体温で動くエンジン作ってみた【スターリングエンジン】 - YouTube](https://www.youtube.com/watch?v=H0aXJKuXF38)
@@ -51,7 +49,6 @@ aaaaaa
 ### Spotify
 [Don't you want me (feat. Such) ‑ 曲・歌詞：PSYQUI, Such \| Spotify](https://open.spotify.com/intl-ja/track/17mgN5KSmEgcZKF9d7qZ8a?si=896f4b82d018407a)
 
-test
 ## note
 [ChatGPTでの業務改善に失敗する前に読むnote｜うめもと](https://note.com/tikumin/n/n23c47148a05d)
 
