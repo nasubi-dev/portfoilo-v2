@@ -18,3 +18,68 @@
   padding: 16px;
   border-radius: 16px;
 }
+
+/* リンクカードのスタイル */
+.link-card {
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: fit-content;
+  height: auto;
+  min-width: 600px;
+  max-width: 1000px;
+  max-height: 250px;
+  display: flex;
+  flex-direction: row;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* グリッドレイアウト - デフォルトスタイル */
+.link-card-grid .link-card-grid-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+/* 画像 - デフォルト */
+.link-card-grid .link-card-image-container img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.link-card-grid .no-image {
+  background-color: #f0f0f0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.link-card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.link-card-content h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.link-card-site {
+  display: block;
+  font-size: 0.8rem;
+  color: #999;
+}

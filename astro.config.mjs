@@ -54,6 +54,7 @@ function remarkEmbedLinks() {
   return async (tree) => {
     const promises = [];
 
+    // @ts-ignore
     visit(tree, "link", (node) => {
       const url = node.url;
 
@@ -63,97 +64,152 @@ function remarkEmbedLinks() {
           ? node.children[0].value
           : "";
 
-      // YouTubeの動画
-      if (
-        url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/)
-      ) {
-        const youtubeId = url.match(
-          /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/
-        )[1];
-        node.type = "html";
-        node.value = `<div class="youtube-embed">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/${youtubeId}"
-            title="${linkTitle || "YouTube video"}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>`;
+      // URLのタイプを判定
+      let urlType = "other";
+      const youtubeMatch = url.match(
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/
+      );
+
+      if (youtubeMatch) {
+        urlType = "youtube";
+      } else if (!url.startsWith("http")) {
+        // HTTPで始まらないリンクはスキップ
+        return;
+      } else if (url.includes("spotify.com")) {
+        urlType = "spotify";
+      } else if (url.includes("zenn.dev")) {
+        urlType = "zenn";
+      } else if (url.includes("qiita.com")) {
+        urlType = "qiita";
+      } else if (url.includes("github.com")) {
+        urlType = "github";
+      } else if (url.includes("note.com")) {
+        urlType = "note";
+      } else if (url.includes("soundcloud.com")) {
+        urlType = "soundcloud";
+      } else if (url.includes("nasubi.dev")) {
+        urlType = "internal";
       }
 
-      // Twitter
-      // else if (url.match(/twitter\.com\/.*\/status\/(\d+)/)) {
-      //   const tweetId = url.match(/twitter\.com\/.*\/status\/(\d+)/)[1];
-      //   node.type = "html";
-      //   node.value = `<div class="tweet-embed" data-tweet-id="${tweetId}">
-      //     <blockquote class="twitter-tweet" data-dnt="true">
-      //       <a href="${url}" title="${
-      //     linkTitle || "Tweet"
-      //   }">Loading Tweet...</a>
-      //     </blockquote>
-      //     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-      //   </div>`;
-      // }
-
-      // Zenn, Qiita, その他のリンク（OGP取得）
-      else if (url.startsWith("http")) {
-        const promise = (async () => {
-          let ogpData;
-
-          if (cache.has(url)) {
-            ogpData = cache.get(url);
-          } else {
-            ogpData = await fetchOGP(url);
-            cache.set(url, ogpData);
-          }
-
-          const title = ogpData.title || node.children[0]?.value || url;
-          const description = ogpData.description || "";
-          const site = ogpData.site_name;
-          const imageHtml = ogpData.image
-            ? `<div class="link-card-image"><img src="${ogpData.image}" alt="${title}" loading="lazy" /></div>`
-            : "";
-
-          // 内部リンクかどうかを判定
-          const isInternal = url.includes("nasubi.dev");
-
-          // Zenn, Qiitaなど特定サイトに対するクラス名
-          let siteClass = "external";
-          if (url.includes("zenn.dev")) siteClass = "zenn";
-          if (url.includes("qiita.com")) siteClass = "qiita";
-          if (url.includes("github.com")) siteClass = "github";
-          if (url.includes("note.com")) siteClass = "note";
-          if (url.includes("soundncloud.com")) siteClass = "soundcloud";
-          if (url.includes("spotify.com")) siteClass = "spotify";
-          if (isInternal) siteClass = "internal";
-
+      switch (urlType) {
+        case "youtube": {
+          // YouTubeの動画
+          const youtubeId = youtubeMatch[1];
           node.type = "html";
-          node.value = `<div class="link-card ${siteClass}">
-            <a href="${url}" ${!isInternal ? 'target="_blank"' : ""}>
-              ${imageHtml}
-              <div class="link-card-content">
-                <h4>${title}</h4>
-                ${
-                  description
-                    ? `<p>${description.substring(0, 100)}${
-                        description.length > 100 ? "..." : ""
-                      }</p>`
-                    : ""
-                }
-                <span class="link-card-site">${site}</span>
-              </div>
-            </a>
+          node.value = `<div class="youtube-embed">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/${youtubeId}"
+              title="${linkTitle || "YouTube video"}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>`;
-        })();
+          break;
+        }
+        case "spotify": {
+          // Spotifyの埋め込み
+          const promise = (async () => {
+            let ogpData;
+            if (cache.has(url)) {
+              ogpData = cache.get(url);
+            } else {
+              ogpData = await fetchOGP(url);
+              cache.set(url, ogpData);
+            }
+            const title = ogpData.title || node.children[0]?.value || url;
+            node.type = "html";
+            node.value = `<div class="spotify-embed">
+              <iframe
+                src="${url.replace("open.spotify.com", "embed.spotify.com")}"
+                width="300"
+                height="380"
+                frameborder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
+                title="${title || "Spotify Embed"}">
+              </iframe>
+            </div>`;
+          })();
+          promises.push(promise);
+          break;
+        }
 
-        promises.push(promise);
+        case "zenn":
+        case "qiita":
+        case "github":
+        case "note":
+        case "soundcloud":
+        case "internal":
+        case "other": {
+          // その他のリンク（OGP取得）
+          const promise = (async () => {
+            let ogpData;
+            if (cache.has(url)) {
+              ogpData = cache.get(url);
+            } else {
+              ogpData = await fetchOGP(url);
+              cache.set(url, ogpData);
+            }
+
+            const title = ogpData.title || node.children[0]?.value || url;
+            const site = ogpData.site_name;
+            const imageHtml = ogpData.image
+              ? `<div class="link-card-image"><img src="${ogpData.image}" alt="${title}" loading="lazy" /></div>`
+              : "";
+
+            // 内部リンクかどうかを判定
+            const isInternal = urlType === "internal";
+            // サイトクラス名
+            const siteClass = urlType !== "other" ? urlType : "external";
+
+            node.type = "html";
+
+            // Zenn, Qiita、または画像のあるカードの場合はグリッドレイアウトを使用
+            if (urlType === "zenn" || urlType === "qiita" || ogpData.image) {
+              // 画像がある場合のみ、比率判定用のクラスを追加
+              const imageRatioClass = ogpData.image
+                ? "link-card-with-image"
+                : "";
+
+              node.value = `<div class="link-card ${siteClass} link-card-grid ${imageRatioClass}">
+                <a href="${url}" target="_blank">
+                  <div class="link-card-grid-container">
+                    <div class="link-card-image-container">
+                      ${
+                        ogpData.image
+                          ? `<img src="${ogpData.image}" alt="${title}" loading="lazy" onload="this.naturalWidth > this.naturalHeight * 1.2 ? this.parentNode.parentNode.classList.add('wide-image') : ''" />`
+                          : `<div class="no-image"></div>`
+                      }
+                    </div>
+                    <div class="link-card-content">
+                      <h4>${title}</h4>
+                      <span class="link-card-site">${site}</span>
+                    </div>
+                  </div>
+                </a>
+              </div>`;
+            } else {
+              // 他のサイトは通常のレイアウト
+              node.value = `<div class="link-card ${siteClass}">
+                <a href="${url}" ${!isInternal ? 'target="_blank"' : ""}>
+                  ${imageHtml}
+                  <div class="link-card-content">
+                    <h4>${title}</h4>
+                    <span class="link-card-site">${site}</span>
+                  </div>
+                </a>
+              </div>`;
+            }
+          })();
+          promises.push(promise);
+          break;
+        }
       }
-    });
+    })();
 
-    // すべての非同期処理を待機
     await Promise.all(promises);
   };
 }

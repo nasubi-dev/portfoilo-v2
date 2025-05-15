@@ -9,6 +9,9 @@ createdAt: 2025-05-15T02:10+09:00
 updatedAt: 2025-05-15T02:10+09:00
 icon: 🍆
 ---
+対応状況
+
+
 ## 各種SNS
 ### GitHub
 リポジトリ
@@ -22,11 +25,11 @@ icon: 🍆
 [x.com/nasubi\_dev/status/1918003847152410916](https://x.com/nasubi_dev/status/1918003847152410916)
 
 ユーザー
-[X](https://x.com/nasubi_dev)
+[@nasubi_dev](https://x.com/nasubi_dev)
 ### Youtube
+
 動画
 [体温で動くエンジン作ってみた【スターリングエンジン】 - YouTube](https://www.youtube.com/watch?v=H0aXJKuXF38)
-
 
 チャンネル
 [ヨルシカ / n-buna Official - YouTube](https://www.youtube.com/@nbuna)
@@ -44,9 +47,17 @@ icon: 🍆
 [Stream なすび \| Listen to I like Hi-tech(?) playlist online for free on SoundCloud](https://soundcloud.com/nasubl/sets/i-like)
 
 ### Spotify
-[ヒステリックナイトガール ‑ 曲・歌詞：PSYQUI, Such \| Spotify](https://open.spotify.com/intl-ja/track/1poGez6IaTb1gtJxkXdlb8?go=1&sp_cid=f4e164f8beda58210d6aa988a017dc0a&utm_source=embed_player_p&utm_medium=desktop&nd=1&dlsi=aa305e82348a4c7f)
+[Don't you want me (feat. Such) ‑ 曲・歌詞：PSYQUI, Such \| Spotify](https://open.spotify.com/intl-ja/track/17mgN5KSmEgcZKF9d7qZ8a?si=896f4b82d018407a)
 
-## 
+test
+## note
+[ChatGPTでの業務改善に失敗する前に読むnote｜うめもと](https://note.com/tikumin/n/n23c47148a05d)
+
 ## ただペーストされたリンク
 
 https://www.youtube.com/watch?v=H0aXJKuXF38
+
+https://note.com/tikumin/n/n23c47148a05d
+
+## インラインのリンク
+たとえばこのテキストの中に https://soundcloud.com/rayvolpemusic/laserbeam があるとこのように表示される｡
