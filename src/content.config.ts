@@ -17,17 +17,22 @@ const commonSchema = z.object({
 
 const post = defineCollection({
   // 実際のディレクトリ構造に合わせて、postsディレクトリを参照するように変更
-  loader: glob({ base: "./src/content/posts", pattern: "**/*.{md,mdx}" }),
+  loader: glob({ base: "./src/content/posts", pattern: "**/*.{md}" }),
   schema: commonSchema.extend({
     icon: z.string().nullable(),
   }),
 });
 
 const products = defineCollection({
-  loader: glob({ base: "./src/content/products", pattern: "**/*.{md,mdx}" }),
+  loader: glob({ base: "./src/content/products", pattern: "**/*.{md}" }),
   schema: commonSchema.extend({
     thumbnail: z.string().nullable(),
   }),
 });
 
-export const collections = { post, products };
+// プロフィール関連のマークダウンファイル用のコレクション
+const profiles = defineCollection({
+  loader: glob({ base: "./src/content/about", pattern: "*.md" }),
+});
+
+export const collections = { post, products, profiles };

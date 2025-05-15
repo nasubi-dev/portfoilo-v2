@@ -7,16 +7,15 @@ type CommonData = {
   tags: string[] | null;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 type Product = CommonData & {
   thumbnail: string | null;
-}
+};
 
 type Post = CommonData & {
   icon: string | null;
-}
-
+};
 
 type Heading = {
   depth: number;

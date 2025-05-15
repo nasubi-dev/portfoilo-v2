@@ -1,0 +1,22 @@
+---
+import { styled as p } from "@styled-system/jsx";
+
+interface Props {
+  username: string;
+}
+
+const { username } = Astro.props;
+---
+
+<p.div
+  padding="4"
+  borderRadius="lg"
+  overflow="hidden"
+>
+  <img
+    src={`https://ghchart.rshah.org/${username}`}
+    alt={`${username}のGitHub contributions`}
+    width="100%"
+    style="max-width: 100%; height: auto;"
+  />
+</p.div>

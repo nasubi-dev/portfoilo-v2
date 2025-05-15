@@ -1,45 +1,92 @@
 ---
 import "@/styles/global.css";
-import Layout from "@/layouts/BlogPost.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import { css } from "@styled-system/css";
 import { ContentContainer } from "@/components/common/ContentContainer";
+import { HStack, VStack, styled as p } from "@styled-system/jsx";
+import { getCollection } from "astro:content";
+import { render } from "astro:content";
+import { Button } from "@/components/common/Button";
+import Avatar from "@/components/Avatar.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import TwitterIcon from "../../public/MdiTwitter.svg";
+import GithubIcon from "../../public/MdiGithub.svg";
+import GitHubContributions from "@/components/GitHubContributions.astro";
+
+const profilesCollection = await getCollection("profiles");
+const profiles = await Promise.all(
+  profilesCollection.map(async (profile) => {
+    const { Content } = await render(profile);
+    return {
+      id: profile.id,
+      Content,
+    };
+  })
+);
 ---
 
 <BaseLayout>
   <ContentContainer widthLimit>
-    <Layout
-      id="about"
-      title="About"
-      slug="about"
-      author="nasubi"
-      createdAt={new Date()}
-      updatedAt={new Date()}
-      description="test test"
-      tags={["test", "test"]}
-      thumbnail="https://content.nasubi.dev/assets/nasubi-new.webp"
-      headings={[
+    <VStack gap="10" alignItems="stretch" py="8">
+      <HStack
+        gap="10"
+        flexDirection={{ base: "column", md: "row" }}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <VStack gap="4" alignItems="center">
+          <Avatar
+            src="https://content.nasubi.dev/assets/nasubi-new.webp"
+            alt="なすびのアバター"
+          />
+          <HStack gap="3">
+            <p.a href="https://twitter.com/nasubi_dev" target="_blank">
+              <TwitterIcon
+                width="32px"
+                height="32px"
+                fill="currentColor"
+                class={css({ margin: "0 0.5em" })}
+              />
+            </p.a>
+            <p.a href="https://github.com/nasubi-dev" target="_blank">
+              <GithubIcon
+                width="32px"
+                height="32px"
+                fill="currentColor"
+                class={css({ margin: "0 0.5em" })}
+              />
+            </p.a>
+          </HStack>
+        </VStack>
+        <VStack alignItems="flex-start" flex="1">
+          <p.h1 fontSize="3xl" fontWeight="bold">なすび nasubi_dev</p.h1>
+          {
+            profiles
+              .filter((profile) => profile.id === "自己紹介")
+              .map((profile) => (
+                <VStack gap="4" alignItems="flex-start">
+                  <profile.Content />
+                </VStack>
+              ))
+          }
+        </VStack>
+      </HStack>
+
+      <GitHubContributions username="nasubi-dev" />
+
+      <p.div>
         {
-          depth: 1,
-          text: "test",
-          slug: "test",
-        },
-        {
-          depth: 2,
-          text: "test",
-          slug: "test-1",
-        },
-        {
-          depth: 3,
-          text: "test",
-          slug: "test-2",
-        },
-      ]}
-    >
-      <img
-        src="https://content.nasubi.dev/assets/nasubi-new.webp"
-        alt="nasubi"
-      />
-      <p>test test</p>
-    </Layout>
+          profiles
+            .filter((profile) => profile.id !== "自己紹介")
+            .map((profile) => (
+              <VStack gap="4" alignItems="flex-start" paddingY="4">
+                <p.h2 fontSize="2xl" fontWeight="bold">
+                  {profile.id}
+                </p.h2>
+                <profile.Content />
+              </VStack>
+            ))
+        }
+      </p.div>
+    </VStack>
   </ContentContainer>
 </BaseLayout>

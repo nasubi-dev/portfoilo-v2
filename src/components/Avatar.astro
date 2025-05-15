@@ -1,0 +1,26 @@
+---
+import { css } from "@styled-system/css";
+import { styled as p } from "@styled-system/jsx";
+import { Image } from "astro:assets";
+
+interface Props {
+  src: string;
+  alt: string;
+  size?: string;
+}
+
+const { src, alt, size = "300px" } = Astro.props;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  inferSize
+  loading="eager"
+  class={css({
+    width: size,
+    height: size,
+    borderRadius: "full",
+    objectFit: "cover",
+  })}
+/>
