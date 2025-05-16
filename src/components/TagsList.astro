@@ -3,9 +3,10 @@ import { styled as p } from "@styled-system/jsx";
 
 type Props = {
   tags: string[] | null;
+  full?: boolean;
 };
 
-const { tags } = Astro.props;
+const { tags, full = false } = Astro.props;
 ---
 
 {
@@ -21,6 +22,25 @@ const { tags } = Astro.props;
       maxWidth="100%"
     >
       {(() => {
+        // fullがtrueの場合はすべてのタグを表示
+        if (full) {
+          return (
+            <>
+              {tags.map((tag) => (
+                <p.span
+                  fontSize="0.75rem"
+                  padding="0.2rem 0.5rem"
+                  background="nsb.secondary"
+                  borderRadius="4px"
+                  title={tag}
+                >
+                  {"#" + tag}
+                </p.span>
+              ))}
+            </>
+          );
+        }
+
         // タグの名前の長さに基づいて表示するタグ数を計算
         const avgTagLength =
           tags.reduce((sum, tag) => sum + tag.length, 0) / tags.length;

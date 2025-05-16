@@ -95,7 +95,7 @@ export default defineConfig({
     },
     pre: {
       width: "100%",
-      minWidth: "500px",
+      minWidth: "300px",
       borderRadius: "md",
       px: "5",
       py: "5",

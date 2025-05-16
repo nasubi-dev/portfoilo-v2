@@ -8,6 +8,7 @@ import TwitterIcon from "../../public/MdiTwitter.svg";
 import GithubIcon from "../../public/MdiGithub.svg";
 import SearchIcon from "../../public/MdiMagnify.svg";
 import { SearchModal } from "@/components/SearchModal.tsx";
+import { MenuModal } from "@/components/MenuModal.tsx";
 
 const currentPath = new URL(Astro.request.url).pathname
   .replace(/\/$/, "")
@@ -97,10 +98,11 @@ const currentPath = new URL(Astro.request.url).pathname
         </HStack>
       </p.div>
       <p.div visibility="visible" sm={{ visibility: "collapse" }} ml="auto">
-        <Button variant="filled" size="md"> menu </Button>
+        <Button variant="filled" size="md" id="menu-button"> menu </Button>
       </p.div>
 
       <SearchModal client:load />
+      <MenuModal client:load />
 
       <p.div visibility="collapse" lg={{ visibility: "visible" }}>
         <Button variant="none" size="sm" id="search-button" client:load>
