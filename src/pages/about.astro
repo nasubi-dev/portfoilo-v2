@@ -58,7 +58,7 @@ const profiles = await Promise.all(
           </HStack>
         </VStack>
         <VStack alignItems="flex-start" flex="1">
-          <p.h1 fontSize="3xl" fontWeight="bold">なすび nasubi_dev</p.h1>
+          <p.h1 fontSize="3xl" fontWeight="bold">なすび / @nasubi_dev</p.h1>
           {
             profiles
               .filter((profile) => profile.id === "自己紹介")
@@ -73,20 +73,22 @@ const profiles = await Promise.all(
 
       <GitHubContributions username="nasubi-dev" />
 
-      <p.div>
-        {
-          profiles
-            .filter((profile) => profile.id !== "自己紹介")
-            .map((profile) => (
-              <VStack gap="4" alignItems="flex-start" paddingY="4">
-                <p.h2 fontSize="2xl" fontWeight="bold">
-                  {profile.id.toUpperCase()}
-                </p.h2>
-                <profile.Content />
-              </VStack>
-            ))
-        }
-      </p.div>
+      <ContentContainer widthLimit="about">
+        <p.div>
+          {
+            profiles
+              .filter((profile) => profile.id !== "自己紹介")
+              .map((profile) => (
+                <VStack gap="4" alignItems="flex-start" paddingY="4">
+                  <p.h2 fontSize="2xl" fontWeight="bold">
+                    {profile.id.toUpperCase()}
+                  </p.h2>
+                  <profile.Content />
+                </VStack>
+              ))
+          }
+        </p.div>
+      </ContentContainer>
     </VStack>
   </ContentContainer>
 </BaseLayout>

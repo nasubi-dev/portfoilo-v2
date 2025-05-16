@@ -37,7 +37,7 @@ aaaaaa
 [Reactの文脈での「副作用」は2種類あるのではという話](https://zenn.dev/uhyo/articles/react-two-side-effects)
 
 ### Qiita
-[Cursorで要件定義がエラいスムーズになった話 #生成AI - Qiita](https://qiita.com/WdknWdkn/items/7c130f2febfdf33b31a4)
+[Cursorで要件定義がエラいスムーズになった話 - Qiita](https://qiita.com/WdknWdkn/items/7c130f2febfdf33b31a4)
 
 ### SoundCloud
 曲

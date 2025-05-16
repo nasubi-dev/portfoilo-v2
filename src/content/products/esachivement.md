@@ -5,12 +5,17 @@ title: esachivement
 author: nasubi
 description: 
 tags:
-  - tag1
+  - React
+  - esa
+  - styled-components
+  - RadixUI
 createdAt: 2025-05-10T06:55+09:00
 updatedAt: 2025-05-10T06:55+09:00
 thumbnail: "![[esachivement-メイン画面.webp]]"
 ---
-あれば画像､動画､スライドをここに
+# 未完成のページ
+
+ あれば画像､動画､スライドをここに
 
 ## 出場 & 受賞歴
 - 技育CAMP 2024 vol.7 

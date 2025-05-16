@@ -10,11 +10,13 @@
 	- Firebase
 	- Supabase
 	- AWS
+- バックエンド
+	- nestjs
 - その他
 	- obsidian
-	- github / git
+	- GitHub / git
 	- figma
 	- docker
 	- python
 	- java
-	- c
+	- C

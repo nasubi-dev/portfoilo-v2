@@ -1,5 +1,5 @@
 - システム工学研究会
 - NxTEND
-	- 東海事業部(matsuriba)
+	- 東海事業部(Matsuriba)
 	- 28Tech 主催
 - STECH

@@ -16,6 +16,10 @@ export const cvaContentContainer = cva({
         maxW: "1300px",
         mx: "auto",
       },
+      about: {
+        maxW: "1000px",
+        mx: "auto",
+      },
     },
   },
 });
