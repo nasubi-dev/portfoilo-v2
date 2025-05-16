@@ -62,6 +62,3 @@ https://open.spotify.com/intl-ja/track/1poGez6IaTb1gtJxkXdlb8?si=c5590f0715c34d4
 
 ## インラインのリンク
 たとえばこのテキストの中に https://soundcloud.com/rayvolpemusic/laserbeam があるとこのように表示されるよ｡
-
-いい感じ
-

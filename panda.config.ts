@@ -73,7 +73,7 @@ export default defineConfig({
     },
     p: {
       fontSize: "1.1rem",
-      lineHeight: "2.2rem",
+      lineHeight: "2.0rem",
     },
     kbd: {
       fontFamily: "var(--udev-gothic-nf)",
@@ -173,7 +173,7 @@ export default defineConfig({
       borderRadius: "8px",
       border: "1px solid #e0e0e0",
       overflow: "hidden",
-      width: "fit-content",
+      width: "auto",
       height: "auto",
       minWidth: "300px",
       maxWidth: "1000px",
