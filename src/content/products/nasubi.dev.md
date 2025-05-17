@@ -28,7 +28,7 @@ thumbnail: "![[nasubi-dev-メイン画面.webp]]"
 - ドメイン名: nasubi.dev
 - フレームワーク: Astro
 - ホスティング: Cloudflare Workers
-- css: PandaCss
+- css: PandaCSS
 - アニメーションライブラリ: GSAP
 - CMS: Obsidian + R2
 - R2 Bucket名: content.nasubi.dev
