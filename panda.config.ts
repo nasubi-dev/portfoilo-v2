@@ -82,6 +82,17 @@ export default defineConfig({
       px: "2",
       py: "0.5",
     },
+    "blockquote p": {
+      bg: "nsb.bg-on",
+      px: "2",
+      py: "2",
+      borderLeft: "4px solid",
+      fontStyle: "italic",
+      color: "nsb.text",
+      fontSize: "1.1rem",
+      lineHeight: "2.0rem",
+      borderLeftColor: "nsb.secondary",
+    },
     code: {
       fontFamily: "var(--udev-gothic-nf)",
       bg: "nsb.bg-on",
