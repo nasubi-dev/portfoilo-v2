@@ -12,6 +12,7 @@ tags:
 createdAt: 2025-05-10T06:55+09:00
 updatedAt: 2025-05-10T06:55+09:00
 thumbnail: "![[esachivement-メイン画面.webp]]"
+carousel:
 ---
 # 未完成のページ
 

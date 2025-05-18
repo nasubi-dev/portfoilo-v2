@@ -11,6 +11,7 @@ tags:
 createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
 thumbnail: "![[メインビジュアル.webp]]"
+carousel:
 ---
 # 未完成のページ
 
@@ -22,3 +23,13 @@ thumbnail: "![[メインビジュアル.webp]]"
 
 > 評価してくれ!!
 
+
+aa
+
+
+```javascript test.js
+let i = 0;
+for (i = 0; i > 30; i++) {
+	
+}
+```

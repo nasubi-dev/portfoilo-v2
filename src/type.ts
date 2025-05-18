@@ -11,6 +11,7 @@ type CommonData = {
 
 type Product = CommonData & {
   thumbnail: string | null;
+  carousel: string[] | null;
 };
 
 type Post = CommonData & {
@@ -23,4 +24,9 @@ type Heading = {
   slug: string;
 };
 
-export type { CommonData, Product, Post, Heading };
+type Tag = {
+  name: string;
+  slug: string;
+}
+
+export type { CommonData, Product, Post, Heading,Tag };

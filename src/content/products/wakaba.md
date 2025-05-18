@@ -12,5 +12,6 @@ tags:
 createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
 thumbnail: "![[wakaba-screenshot.webp]]"
+carousel:
 ---
 # 未完成のページ

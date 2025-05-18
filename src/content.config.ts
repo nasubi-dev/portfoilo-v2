@@ -27,6 +27,7 @@ const products = defineCollection({
   loader: glob({ base: "./src/content/products", pattern: "**/*.md" }),
   schema: commonSchema.extend({
     thumbnail: z.string().nullable(),
+    carousel: z.array(z.string()).nullable(),
   }),
 });
 

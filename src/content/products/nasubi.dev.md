@@ -13,6 +13,7 @@ tags:
 createdAt: 2025-05-16T01:37+09:00
 updatedAt: 2025-05-16T01:37+09:00
 thumbnail: "![[nasubi-dev-メイン画面.webp]]"
+carousel:
 ---
 ![[nasubi-dev-products一覧.webp]]
 

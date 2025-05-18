@@ -5,6 +5,7 @@ import TagsList from "@/components/TagsList.astro";
 import type { Heading, Product, Post } from "@/type";
 import { styled as p, HStack } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
+import Carousel from "@/components/Carousel.astro";
 import { R2_BUCKET } from "@/consts";
 
 type Props =
@@ -15,6 +16,7 @@ type Props =
   | (Post & {
       headings: Heading[];
       thumbnail?: string | null;
+      carousel?: string | null;
     });
 
 const {
@@ -29,6 +31,7 @@ const {
   tags = [],
   thumbnail = null,
   icon = null,
+  carousel = null,
 } = Astro.props;
 
 const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
@@ -46,7 +49,9 @@ const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
     marginBottom="8"
   >
     {
-      thumbnail ? (
+      carousel ? (
+        <Carousel images={carousel} />
+      ) : thumbnail ? (
         <p.img
           src={`${R2_BUCKET}/${replaceThumbnail}`}
           alt={title}
@@ -109,10 +114,7 @@ const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
     borderRadius="full"
   />
 
-  <p.div
-    display={{ base: "block", lg: "none" }}
-    marginBottom="4"
-  >
+  <p.div display={{ base: "block", lg: "none" }} marginBottom="4">
     {headings && headings.length > 0 && <TableOfContents headings={headings} />}
   </p.div>
 
