@@ -1,4 +1,4 @@
-import { svaDialog } from "./common/modal";
+import { svaDialog } from "./common/dialog";
 import { Dialog } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { css } from "@styled-system/css";
@@ -49,7 +49,7 @@ function Content() {
               padding: "1em",
               width: "100%",
               textAlign: "center",
-              fontSize: "1.5rem"
+              fontSize: "1.5rem",
             })}
           >
             Posts
@@ -60,7 +60,7 @@ function Content() {
               padding: "1em",
               width: "100%",
               textAlign: "center",
-              fontSize: "1.5rem"
+              fontSize: "1.5rem",
             })}
           >
             Products
@@ -71,7 +71,7 @@ function Content() {
               padding: "1em",
               width: "100%",
               textAlign: "center",
-              fontSize: "1.5rem"
+              fontSize: "1.5rem",
             })}
           >
             About

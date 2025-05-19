@@ -1,4 +1,4 @@
-import { svaDialog } from "./common/modal";
+import { svaDialog } from "./common/dialog";
 import { Dialog } from "@ark-ui/react/dialog";
 import { Portal } from "@ark-ui/react/portal";
 import { css } from "@styled-system/css";
