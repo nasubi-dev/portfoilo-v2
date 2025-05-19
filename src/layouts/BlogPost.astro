@@ -5,8 +5,9 @@ import TagsList from "@/components/TagsList.astro";
 import type { Heading, Product, Post } from "@/type";
 import { styled as p, HStack } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
-import Carousel from "@/components/Carousel.astro";
+import { ArkCarousel } from "@/components/ArkCarousel";
 import { R2_BUCKET } from "@/consts";
+import cleanImagePath from "@/utils/cleanImagePath";
 
 type Props =
   | (Product & {
@@ -16,7 +17,7 @@ type Props =
   | (Post & {
       headings: Heading[];
       thumbnail?: string | null;
-      carousel?: string | null;
+      carousel?: string[] | null;
     });
 
 const {
@@ -34,9 +35,7 @@ const {
   carousel = null,
 } = Astro.props;
 
-const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
-  ?.replace(/!\[\[/g, "")
-  .replace(/\]\]/g, "");
+const replaceThumbnail = cleanImagePath(thumbnail ?? "nasubi-new.webp");
 ---
 
 <p.div width="100%">
@@ -49,8 +48,8 @@ const replaceThumbnail = (thumbnail ?? "nasubi-new.webp")
     marginBottom="8"
   >
     {
-      carousel ? (
-        <Carousel images={carousel} />
+      carousel && thumbnail ? (
+        <ArkCarousel images={carousel} thumbnail={thumbnail} client:load />
       ) : thumbnail ? (
         <p.img
           src={`${R2_BUCKET}/${replaceThumbnail}`}

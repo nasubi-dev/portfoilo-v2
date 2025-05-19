@@ -12,6 +12,9 @@ createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
 thumbnail: "![[メインビジュアル.webp]]"
 carousel:
+  - "![[ブログ部分のスクリーンショット.webp]]"
+  - "![[記事のトップ画面.webp]]"
+  - "![[nasubi-new.webp]]"
 ---
 # 未完成のページ
 
