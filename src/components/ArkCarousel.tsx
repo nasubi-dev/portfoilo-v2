@@ -38,6 +38,7 @@ export const ArkCarousel = ({ images, thumbnail }: ArkCarouselProps) => {
       slideCount={replaceImages.length}
       page={page}
       onPageChange={(details) => setPage(details.page)}
+      loop
     >
       <Carousel.Control className={css(styles.control)}>
         <Carousel.PrevTrigger className={css(styles.prevTrigger)}>
