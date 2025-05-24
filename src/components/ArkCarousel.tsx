@@ -1,5 +1,5 @@
 import { Carousel } from "@ark-ui/react/carousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { R2_BUCKET } from "@/consts";
 import { svaCarousel } from "./common/carousel";
 import { css } from "@styled-system/css";
@@ -24,26 +24,33 @@ export const ArkCarousel = ({ images, thumbnail }: ArkCarouselProps) => {
     })
   );
 
+  // 3000msごとに画像を切り替える
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPage((prevPage) => (prevPage + 1) % replaceImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [replaceImages.length]);
+
   return (
     <Carousel.Root
       className={css(styles.root)}
       slideCount={replaceImages.length}
       page={page}
-      loop
-      autoplay
-      onPageChange={(e) => setPage(e.page)}
+      onPageChange={(details) => setPage(details.page)}
     >
       <Carousel.Control className={css(styles.control)}>
-        <Carousel.AutoplayTrigger>
-          <Carousel.Context>
-            {({ isPlaying }) => (isPlaying ? "Pause" : "Play")}
-          </Carousel.Context>
-        </Carousel.AutoplayTrigger>
         <Carousel.PrevTrigger className={css(styles.prevTrigger)}>
-          Previous
+          <img
+            src="../../public/MaterialSymbolsArrowBackIos.svg"
+            alt="Previous"
+          />
         </Carousel.PrevTrigger>
         <Carousel.NextTrigger className={css(styles.nextTrigger)}>
-          Next
+          <img
+            src="../../public/MaterialSymbolsArrowForwardIos.svg"
+            alt="Next"
+          />
         </Carousel.NextTrigger>
       </Carousel.Control>
       <Carousel.IndicatorGroup className={css(styles.indicatorGroup)}>
@@ -58,7 +65,10 @@ export const ArkCarousel = ({ images, thumbnail }: ArkCarouselProps) => {
       <Carousel.ItemGroup className={css(styles.itemGroup)}>
         {replaceImages.map((image, index) => (
           <Carousel.Item key={index} index={index} className={css(styles.item)}>
-            <img src={`${R2_BUCKET}/${image}`} alt={`Slide ${index}`} />
+            <img
+              src={`${R2_BUCKET}/${image}`}
+              alt={`Slide ${index}: ${replaceImages}`}
+            />
           </Carousel.Item>
         ))}
       </Carousel.ItemGroup>
