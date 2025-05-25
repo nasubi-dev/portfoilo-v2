@@ -1,13 +1,38 @@
 ---
 import { css } from "@styled-system/css";
-import { styled as p } from "@styled-system/jsx";
+import { styled as p, VStack } from "@styled-system/jsx";
 import HomeLayout from "@/layouts/HomeLayout.astro";
-import { Expanded } from "@/components/common/Expanded.tsx";
-import Header from "@/components/Header.astro";
+import { ContentContainer } from "@/components/common/ContentContainer";
+import { ArkQrCode } from "@/components/ArkQrCode";
 ---
 
 <HomeLayout>
-  <Expanded basedOn="screen" items="center">
-
-  </Expanded>
+  <ContentContainer>
+    <VStack
+      gap="10"
+      justifyContent="space-between"
+      h="max-content"
+      alignItems="center"
+    >
+      <VStack>
+        <ArkQrCode url="https://nasubi.dev" client:load />
+        <p.p> nasubi.dev </p.p>
+      </VStack>
+      <VStack>
+        <ArkQrCode
+          url="https://x.com/nasubi_dev"
+          iconUrl="https://content.nasubi.dev/assets/twitter.webp"
+          client:load
+        />
+        <p.p> @nasubi_dev </p.p>
+      </VStack>
+      <VStack>
+        <ArkQrCode
+          url="https://github.com/nasubi-dev"
+          iconUrl="https://content.nasubi.dev/assets/github.webp"
+          client:load
+        /><p.p> @nasubi-dev </p.p>
+      </VStack>
+    </VStack>
+  </ContentContainer>
 </HomeLayout>

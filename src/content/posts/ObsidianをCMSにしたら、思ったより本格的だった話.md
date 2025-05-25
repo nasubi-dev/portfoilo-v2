@@ -21,7 +21,6 @@ Qiitaに同じ内容で投稿したところ､約180いいねとトレンド一
 
 [ObsidianをCMSにしたら、思ったより本格的だった話 #cloudflare - Qiita](https://qiita.com/nasubi_dev/items/2237101b170f7327e4a0)
 
-
 ## あらすじ
 
 最近､Obsidian + Cursorの組み合わせが流行していますよね｡
