@@ -10,6 +10,7 @@ import Avatar from "@/components/Avatar.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import TwitterIcon from "../../public/MdiTwitter.svg";
 import GithubIcon from "../../public/MdiGithub.svg";
+import QrCodeIcon from "../../public/MdiQrcode.svg";
 import GitHubContributions from "@/components/GitHubContributions.astro";
 
 const profilesCollection = await getCollection("profiles");
@@ -49,6 +50,14 @@ const profiles = await Promise.all(
             </p.a>
             <p.a href="https://github.com/nasubi-dev" target="_blank">
               <GithubIcon
+                width="32px"
+                height="32px"
+                fill="currentColor"
+                class={css({ margin: "0 0.5em" })}
+              />
+            </p.a>
+            <p.a href="/qr-code/">
+              <QrCodeIcon
                 width="32px"
                 height="32px"
                 fill="currentColor"
