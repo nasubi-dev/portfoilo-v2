@@ -10,5 +10,11 @@ export const svaDialog = sva({
       inset: "0",
       zIndex: "100",
     },
+    backdrop: {
+      position: "fixed",
+      inset: "0",
+      zIndex: "90",
+      bgColor: "rgba(0, 0, 0, 0.5)",
+    },
   },
 });

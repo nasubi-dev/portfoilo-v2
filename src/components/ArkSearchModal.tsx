@@ -5,20 +5,43 @@ import { css } from "@styled-system/css";
 import { HStack, styled as p, VStack } from "@styled-system/jsx";
 import { useEffect, useState } from "react";
 
-function Content() {
+
+function Content({ onClose }: { onClose: () => void }) {
+  const handleContentClick = (e: React.MouseEvent) => {
+    // Dialog.Content自体がクリックされた場合のみ閉じる
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
     <Dialog.Content
       className={css(svaDialog.raw().content, {
-        bg: "nsb.bg-overlay",
-        color: "nsb.text",
+        position: "fixed",
+        inset: "0",
+        zIndex: "100",
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "center",
+        pt: "20",
         "& > *": {
           zIndex: "100",
         },
       })}
+      onClick={handleContentClick}
     >
-      <VStack>
-        <Dialog.CloseTrigger>close</Dialog.CloseTrigger>
+      <VStack
+        bg={"nsb.bg-overlay"}
+        color="nsb.text"
+        gap="2em"
+        padding="2em"
+        rounded={"md"}
+        width={{ base: "90%", sm: "50%" }}
+        maxWidth="600px"
+        boxShadow="md"
+      >
         <Dialog.Title>Search</Dialog.Title>
+
         <Dialog.Description>Search for something</Dialog.Description>
       </VStack>
     </Dialog.Content>
@@ -60,12 +83,17 @@ export function SearchModal() {
     };
   }, []);
 
+  // ESCキーでモーダルを閉じる
+  const handleOpenChange = (details: { open: boolean }) => {
+    setIsOpen(details.open);
+  };
+
   return (
-    <Dialog.Root open={isOpen} onOpenChange={() => setIsOpen(false)}>
+    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
       <Portal>
-        <Dialog.Backdrop />
+        <Dialog.Backdrop className={css(svaDialog.raw().backdrop)} />
         <Dialog.Positioner>
-          <Content />
+          <Content onClose={() => setIsOpen(false)} />
         </Dialog.Positioner>
       </Portal>
     </Dialog.Root>
