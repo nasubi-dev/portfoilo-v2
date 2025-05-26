@@ -4,11 +4,11 @@ import { Portal } from "@ark-ui/react/portal";
 import { css } from "@styled-system/css";
 import { HStack, styled as p, VStack } from "@styled-system/jsx";
 import { useEffect, useState } from "react";
-
+import Search from "./Search";
+import "@pagefind/default-ui/css/ui.css";
 
 function Content({ onClose }: { onClose: () => void }) {
   const handleContentClick = (e: React.MouseEvent) => {
-    // Dialog.Content自体がクリックされた場合のみ閉じる
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -41,7 +41,7 @@ function Content({ onClose }: { onClose: () => void }) {
         boxShadow="md"
       >
         <Dialog.Title>Search</Dialog.Title>
-
+        <Search />
         <Dialog.Description>Search for something</Dialog.Description>
       </VStack>
     </Dialog.Content>
