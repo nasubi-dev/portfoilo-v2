@@ -99,7 +99,24 @@ const currentPath = new URL(Astro.request.url).pathname
         </HStack>
       </p.div>
       <p.div visibility="visible" sm={{ visibility: "collapse" }} ml="auto">
-        <Button variant="filled" size="md" id="menu-button"> menu </Button>
+        <HStack>
+          <p.div visibility="visible" sm={{ visibility: "collapse" }}>
+            <Button
+              variant="none"
+              size="sm"
+              ml="auto"
+              id="search-button-mobile"
+            >
+              <SearchIcon
+                width="28px"
+                height="28px"
+                fill="currentColor"
+                class={css({ margin: "0 0.5em" })}
+              />
+            </Button>
+          </p.div>
+          <Button variant="filled" size="md" id="menu-button"> menu </Button>
+        </HStack>
       </p.div>
 
       <SearchModal client:load />
