@@ -1,6 +1,7 @@
 ---
-import { styled as p } from "@styled-system/jsx";
-import { type Tag } from "@/type";
+import { styled as p, HStack } from "@styled-system/jsx";
+import { Icon } from "astro-iconify";
+import { TAGS_LIST } from "@/consts";
 
 type Props = {
   tags: string[] | null;
@@ -28,15 +29,25 @@ const { tags, full = false } = Astro.props;
           return (
             <>
               {tags.map((tag) => (
-                <p.span
+                <HStack
                   fontSize="0.75rem"
                   padding="0.2rem 0.5rem"
                   background="nsb.secondary"
                   borderRadius="4px"
                   title={tag}
                 >
+                  <p.div bg={"#fff"} borderRadius="4px" padding="0.2rem">
+                    <Icon
+                      name={
+                        TAGS_LIST.find((t) => t.name === tag)?.slug ?? "mdi:tag"
+                      }
+                      width="16px"
+                      height="16px"
+                      color="currentColor"
+                    />
+                  </p.div>
                   {"#" + tag}
-                </p.span>
+                </HStack>
               ))}
             </>
           );
@@ -54,26 +65,38 @@ const { tags, full = false } = Astro.props;
         return (
           <>
             {tags.slice(0, visibleTagCount).map((tag) => (
-              <p.span
+              <HStack
                 fontSize="0.75rem"
                 padding="0.2rem 0.5rem"
                 background="nsb.secondary"
                 borderRadius="4px"
                 title={tag}
               >
+                <p.div bg={"#fff"} borderRadius="4px" padding="0.2rem">
+                  <Icon
+                    name={
+                      TAGS_LIST.find((t) => t.name === tag)?.slug ?? "mdi:tag"
+                    }
+                    width="16px"
+                    height="16px"
+                    color="currentColor"
+                  />
+                </p.div>
                 {"#" + tag}
-              </p.span>
+              </HStack>
             ))}
             {tags.length > visibleTagCount && (
               <p.span
                 fontSize="0.75rem"
-                padding="0.2rem 0.5rem"
+                padding="0.2rem 0.4rem"
                 background="nsb.secondary"
                 borderRadius="4px"
                 whiteSpace="nowrap"
                 title={`${tags.length - visibleTagCount}個の追加タグ: ${tags.slice(visibleTagCount).join(", ")}`}
               >
-                {`+${tags.length - visibleTagCount}`}
+                <p.div width="16px" height="16px" padding="0.2rem">
+                  {`+${tags.length - visibleTagCount}`}
+                </p.div>
               </p.span>
             )}
           </>

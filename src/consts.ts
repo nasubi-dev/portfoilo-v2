@@ -1,18 +1,17 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
 export const SITE_TITLE = "nasubi.dev";
 export const SITE_DESCRIPTION = "Welcome to nasubi.dev";
 export const R2_BUCKET = "https://content.nasubi.dev/assets";
-// export const TAGS_LIST = [
-//   { name: "JavaScript", slug: "javascript" },
-//   { name: "TypeScript", slug: "typescript" },
-//   { name: "React", slug: "react" },
-//   { name: "Astro", slug: "astro" },
-//   { name: "TailwindCSS", slug: "tailwindcss" },
-//   { name: "PandaCSS", slug: "pandacss" },
-//   { name: "RadixUI", slug: "radixui" },
-//   { name: "ArkUI", slug: "arkui" },
-//   { name: "CSS", slug: "css" },
-
-// ];
+export const TAGS_LIST = [
+  { name: "React", slug: "logos:react" },
+  { name: "Vue", slug: "logos:vue" },
+  { name: "Astro", slug: "logos:astro-icon" },
+  { name: "TailwindCSS", slug: "logos:tailwindcss-icon" },
+  { name: "PandaCSS", slug: "logos:pandacss-icon" },
+  { name: "styled-components", slug: "devicon:styledcomponents" },
+  { name: "RadixUI", slug: "tabler:brand-radix-ui" },
+  { name: "Firebase", slug: "logos:firebase" },
+  { name: "Obsidian", slug: "logos:obsidian-icon" },
+  { name: "Figma", slug: "logos:figma" },
+  {name: "Cloudflare", slug: "logos:cloudflare-icon" },
+  {name: "R2", slug: "logos:cloudflare-icon" },
+];

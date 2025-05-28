@@ -27,6 +27,6 @@ type Heading = {
 type Tag = {
   name: string;
   slug: string;
-}
+};
 
-export type { CommonData, Product, Post, Heading,Tag };
+export type { CommonData, Product, Post, Heading, Tag };
