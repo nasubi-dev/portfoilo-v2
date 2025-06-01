@@ -7,7 +7,7 @@ import { styled as p, HStack } from "@styled-system/jsx";
 import { css } from "@styled-system/css";
 import { ArkCarousel } from "@/components/ArkCarousel";
 import { R2_BUCKET } from "@/consts";
-import cleanImagePath from "@/utils/cleanImagePath";
+import cleanAssetPath from "@/utils/cleanAssetPath";
 
 type Props =
   | (Product & {
@@ -35,7 +35,7 @@ const {
   carousel = null,
 } = Astro.props;
 
-const replaceThumbnail = cleanImagePath(thumbnail ?? "nasubi-new.webp");
+const replaceThumbnail = cleanAssetPath(thumbnail ?? "nasubi-new.webp");
 ---
 
 <p.div width="100%">
@@ -48,8 +48,8 @@ const replaceThumbnail = cleanImagePath(thumbnail ?? "nasubi-new.webp");
     marginBottom="8"
   >
     {
-      carousel && thumbnail ? (
-        <ArkCarousel images={carousel} thumbnail={thumbnail} client:load />
+      carousel && thumbnail && carousel.length !== 0 ? (
+        <ArkCarousel assets={carousel} thumbnail={thumbnail} client:load />
       ) : thumbnail ? (
         <p.img
           src={`${R2_BUCKET}/${replaceThumbnail}`}

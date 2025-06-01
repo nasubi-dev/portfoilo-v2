@@ -3,39 +3,39 @@ import { useEffect, useState } from "react";
 import { R2_BUCKET } from "@/consts";
 import { svaCarousel } from "./common/carousel";
 import { css } from "@styled-system/css";
-import cleanImagePath from "@/utils/cleanImagePath";
+import cleanAssetPath from "@/utils/cleanAssetPath";
 
 type ArkCarouselProps = {
-  images: string[];
+  assets: string[];
   thumbnail: string;
 };
 
-export const ArkCarousel = ({ images, thumbnail }: ArkCarouselProps) => {
+export const ArkCarousel = ({ assets, thumbnail }: ArkCarouselProps) => {
   const [page, setPage] = useState(0);
   const styles = svaCarousel.raw();
 
-  // thumbnailを先頭に追加したimagesを作成
-  const replaceImages = [cleanImagePath(thumbnail)].concat(
-    images.map((image) => {
-      if (image.startsWith("![")) {
-        return cleanImagePath(image);
+  // thumbnailを先頭に追加したassetsを作成
+  const replaceAssets = [cleanAssetPath(thumbnail)].concat(
+    assets.map((asset) => {
+      if (asset.startsWith("![")) {
+        return cleanAssetPath(asset);
       }
-      return image;
+      return asset;
     })
   );
 
   // 3000msごとに画像を切り替える
   useEffect(() => {
     const interval = setInterval(() => {
-      setPage((prevPage) => (prevPage + 1) % replaceImages.length);
+      setPage((prevPage) => (prevPage + 1) % replaceAssets.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [replaceImages.length]);
+  }, [replaceAssets.length]);
 
   return (
     <Carousel.Root
       className={css(styles.root)}
-      slideCount={replaceImages.length}
+      slideCount={replaceAssets.length}
       page={page}
       onPageChange={(details) => setPage(details.page)}
       loop
@@ -55,7 +55,7 @@ export const ArkCarousel = ({ images, thumbnail }: ArkCarouselProps) => {
         </Carousel.NextTrigger>
       </Carousel.Control>
       <Carousel.IndicatorGroup className={css(styles.indicatorGroup)}>
-        {replaceImages.map((_, index) => (
+        {replaceAssets.map((_, index) => (
           <Carousel.Indicator
             key={index}
             index={index}
@@ -64,12 +64,25 @@ export const ArkCarousel = ({ images, thumbnail }: ArkCarouselProps) => {
         ))}
       </Carousel.IndicatorGroup>
       <Carousel.ItemGroup className={css(styles.itemGroup)}>
-        {replaceImages.map((image, index) => (
+        {replaceAssets.map((asset, index) => (
           <Carousel.Item key={index} index={index} className={css(styles.item)}>
-            <img
-              src={`${R2_BUCKET}/${image}`}
-              alt={`Slide ${index}: ${replaceImages}`}
-            />
+            {asset.endsWith(".webp") ||
+            asset.endsWith(".jpeg") ||
+            asset.endsWith(".png") ? (
+              <img
+                src={`${R2_BUCKET}/${asset}`}
+                alt={`Slide ${index}: ${replaceAssets}`}
+                loading="lazy"
+              />
+            ) : (
+              <video
+                src={`${R2_BUCKET}/${asset}`}
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            )}
           </Carousel.Item>
         ))}
       </Carousel.ItemGroup>

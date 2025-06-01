@@ -6,7 +6,7 @@ import { type Product } from "@/type";
 import { css } from "@styled-system/css";
 import { styled as p, HStack, VStack } from "@styled-system/jsx";
 import { Image } from "astro:assets";
-import cleanImagePath from "@/utils/cleanImagePath";
+import cleanAssetPath from "@/utils/cleanAssetPath";
 
 type Props = Product;
 
@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 
 // ![[url]]の形式であれば urlにする
-const replaceThumbnail = cleanImagePath(thumbnail ?? "nasubi-new.webp");
+const replaceThumbnail = cleanAssetPath(thumbnail ?? "nasubi-new.webp");
 ---
 
 <p.a
