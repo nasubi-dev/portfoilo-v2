@@ -9,13 +9,13 @@ export const svaCarousel = sva({
       position: "relative",
       width: "100%",
       aspectRatio: "16/9",
-      overflow: "hidden",
+      overflowX: "hidden",
     },
     itemGroup: {
       display: "flex",
       width: "100%",
       height: "100%",
-      overflow: "hidden",
+      overflowX: "hidden",
     },
     item: {
       width: "100%",
@@ -25,7 +25,7 @@ export const svaCarousel = sva({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      overflow: "hidden",
+      overflowX: "hidden",
       "& img": {
         maxWidth: "100%",
         maxHeight: "100%",
