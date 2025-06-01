@@ -11,7 +11,10 @@ tags:
 createdAt: 2025-05-10T06:57+09:00
 updatedAt: 2025-05-10T06:57+09:00
 thumbnail: "![[メインビジュアル.webp]]"
-carousel: []
+carousel:
+  - "![[28Tech-loading-loop.webm]]"
+  - "![[fookeys技育博賞状.webp]]"
+  - "![[microcms技術構成.webp]]"
 ---
 ## デモ動画
 [fookeys動作動画 - YouTube](https://www.youtube.com/watch?v=-RsJv_yJDFc&feature=youtu.be)
