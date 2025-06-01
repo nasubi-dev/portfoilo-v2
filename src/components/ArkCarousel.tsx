@@ -4,8 +4,8 @@ import { R2_BUCKET } from "@/consts";
 import { svaCarousel } from "./common/carousel";
 import { css } from "@styled-system/css";
 import cleanAssetPath from "@/utils/cleanAssetPath";
-import ArrowForward from "../../public/MaterialSymbolsArrowForwardIos.svg";
-import ArrowBack from "../../public/MaterialSymbolsArrowBackIos.svg";
+import ArrowForward from "@/assets/MaterialSymbolsArrowForwardIos.svg";
+import ArrowBack from "@/assets/MaterialSymbolsArrowBackIos.svg";
 
 type ArkCarouselProps = {
   assets: string[];
@@ -44,10 +44,10 @@ export const ArkCarousel = ({ assets, thumbnail }: ArkCarouselProps) => {
     >
       <Carousel.Control className={css(styles.control)}>
         <Carousel.PrevTrigger className={css(styles.prevTrigger)}>
-          <ArrowBack />
+          <img src={ArrowBack.src} alt="Previous" />
         </Carousel.PrevTrigger>
         <Carousel.NextTrigger className={css(styles.nextTrigger)}>
-          <ArrowForward />
+          <img src={ArrowForward.src} alt="Next" />
         </Carousel.NextTrigger>
       </Carousel.Control>
       <Carousel.IndicatorGroup className={css(styles.indicatorGroup)}>
