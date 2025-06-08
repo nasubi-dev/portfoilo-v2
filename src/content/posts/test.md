@@ -9,7 +9,7 @@ createdAt: 2025-05-10T06:58+09:00
 updatedAt: 2025-05-10T06:58+09:00
 icon: 🍆
 ---
-gitの差分test
+gitの差分test2
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
 
