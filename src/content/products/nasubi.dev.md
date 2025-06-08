@@ -3,7 +3,7 @@ id: oGxO7eu8B2OcUNC6wKCKq
 slug: nasubi-dev
 title: nasubi.dev
 author: nasubi
-description: 
+description: 旧サイトのパフォーマンス悪化を受け、ゼロからポートフォリオを再構築。表示速度を最優先し、モダンなSSGアーキテクチャ、適切なCSS、シームレスなUXアニメーションに注力。遊び心あるアニメーションやイースターエッグも今後実装予定。
 tags:
   - Astro
   - Cloudflare
@@ -11,11 +11,12 @@ tags:
   - Obsidian
   - GSAP
 createdAt: 2025-05-16T01:37+09:00
-updatedAt: 2025-05-16T01:37+09:00
+updatedAt: 2025-06-06T00:30+09:00
 thumbnail: "![[nasubi-dev-メイン画面.webp]]"
 carousel:
 ---
 ## 概要
+
 
 パフォーマンス指標の悪化が目立っていた旧サイトを廃棄し, 完全にゼロからポートフォリオを再構築しました. 今回は表示速度を最優先事項として設計し, モダンなSSGアーキテクチャとそれに適したCSS, そしてシームレスなUXを両立させるアニメーション実装にフォーカスしています.
 
