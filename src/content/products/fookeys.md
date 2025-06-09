@@ -1,6 +1,7 @@
 ---
 id: Rimb8LWXEAAUEbp4dYS3T
 slug: fookeys
+title: fookeys
 author: nasubi
 description: ブラウザで動作する1対1の対戦型カードゲーム「Fookeys」。高校の授業で食品ロス問題に着目し開発。小中高生が消費活動を見直すきっかけとなるよう、ゲームを通じて食品ロスへの理解を深め、行動変容を促すことを目指す。
 tags:

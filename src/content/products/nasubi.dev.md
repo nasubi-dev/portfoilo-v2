@@ -1,6 +1,7 @@
 ---
 id: oGxO7eu8B2OcUNC6wKCKq
 slug: nasubi-dev
+title: nasubi.dev
 author: nasubi
 description: 旧サイトのパフォーマンス悪化を受け、ゼロからポートフォリオを再構築。表示速度を最優先し、モダンなSSGアーキテクチャ、適切なCSS、シームレスなUXアニメーションに注力。遊び心あるアニメーションやイースターエッグも今後実装予定。
 tags:
