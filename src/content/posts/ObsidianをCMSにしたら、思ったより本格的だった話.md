@@ -1,7 +1,6 @@
 ---
 id: oSoBsWoaEG91xrCJC-1Ok
 slug: obsidian-as-serious-cms
-title: ObsidianをCMSにしたら､思ったより本格的だった話
 author: nasubi
 description: 一般的なヘッドレスCMSではなく､ObsidianとCloudflare R2を組み合わせたCMS構成でポートフォリオサイトを構築した話
 tags:

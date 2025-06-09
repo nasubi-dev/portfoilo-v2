@@ -1,7 +1,6 @@
 ---
 id: WhlauWmnUJzs0J63ltQjV
 slug: wakaba
-title: wakaba
 author: nasubi
 description: 
 tags:

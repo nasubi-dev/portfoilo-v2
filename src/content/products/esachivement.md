@@ -1,7 +1,6 @@
 ---
 id: 8WdGP2H5dcnWADsEO2s7L
 slug: esachivement
-title: esachivement
 author: nasubi
 description: 
 tags:
