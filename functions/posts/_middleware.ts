@@ -7,13 +7,13 @@ interface Props {
 
 export const onRequest = vercelOGPagesPlugin<Props>({
   imagePathSuffix: "/social-image.png",
-  component: ({ ogTitle, pathname }) => {
-    return <div style={{ display: "flex" }}>{ogTitle}</div>;
+  component: ({ ogTitle }) => {
+    return React.createElement("div", {}, ogTitle);
   },
   extractors: {
     on: {
       'meta[property="og:title"]': (props) => ({
-        element(element) {
+        element(element: any) {
           props.ogTitle = element.getAttribute("content");
         },
       }),
