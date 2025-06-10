@@ -14,7 +14,7 @@ import ClipboardIcon from "../../../public/MdiClipboardOutline.svg";
 export async function getStaticPaths() {
   const posts = await getCollection("post");
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { id: post.id },
     props: post,
   }));
 }
