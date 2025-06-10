@@ -24,9 +24,10 @@ type Props = CollectionEntry<"products">;
 const post = Astro.props;
 const { Content, headings } = await render(post);
 const shareUrl = `https://nasubi.dev/products/${post.data.slug}`;
+const ogpPath = `products/${post.id}`;
 ---
 
-<BaseLayout>
+<BaseLayout ogpPath={ogpPath}>
   <ContentContainer widthLimit>
     <BlogPost headings={headings} {...post.data}>
       <HStack alignItems="flex-start" gap="4">

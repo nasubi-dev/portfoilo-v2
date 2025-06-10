@@ -13,7 +13,7 @@ const posts = (await getCollection("post"))
   .sort((a, b) => b.createdAt.valueOf() - a.createdAt.valueOf());
 ---
 
-<BaseLayout>
+<BaseLayout ogpPath="index">
   <ContentContainer widthLimit>
     <Grid
       gridTemplateColumns={{

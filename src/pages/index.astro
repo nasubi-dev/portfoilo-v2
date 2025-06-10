@@ -4,10 +4,9 @@ import { styled as p } from "@styled-system/jsx";
 import HomeLayout from "@/layouts/HomeLayout.astro";
 import { Expanded } from "@/components/common/Expanded.tsx";
 import Header from "@/components/Header.astro";
-
 ---
 
-<HomeLayout title="Home">
+<HomeLayout title="Home" ogpPath="index">
   <Header />
   <Expanded basedOn="screen" items="center">
     <p.p>🍆 Hello, everyone!</p.p>
