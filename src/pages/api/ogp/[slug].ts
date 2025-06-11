@@ -63,25 +63,20 @@ export const GET: APIRoute = async ({ params, request }) => {
 };
 
 export const getStaticPaths = async () => {
-  try {
-    const posts = await getCollection("post");
-    const products = await getCollection("products");
+  const posts = await getCollection("post");
+  const products = await getCollection("products");
 
-    const paths = [
-      // その他のページ用
-      { params: { slug: "index" } },
-      { params: { slug: "about" } },
-      // posts用
-      ...posts.map((post) => ({ params: { slug: `posts-${post.id}` } })),
-      // products用
-      ...products.map((product) => ({
-        params: { slug: `products-${product.id}` },
-      })),
-    ];
+  const paths = [
+    // その他のページ用
+    { params: { slug: "index" } },
+    { params: { slug: "about" } },
+    // posts用
+    ...posts.map((post) => ({ params: { slug: `posts-${post.id}` } })),
+    // products用
+    ...products.map((product) => ({
+      params: { slug: `products-${product.id}` },
+    })),
+  ];
 
-    return paths;
-  } catch (error) {
-    console.error("Error generating static paths:", error);
-    return [{ params: { slug: "index" } }, { params: { slug: "about" } }];
-  }
+  return paths;
 };
