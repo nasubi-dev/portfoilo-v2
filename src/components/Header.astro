@@ -115,6 +115,16 @@ const currentPath = new URL(Astro.request.url).pathname
               />
             </Button>
           </p.div>
+          <p.div visibility="visible" sm={{ visibility: "collapse" }}>
+            <p.a href="/qr-code/">
+              <QrCodeIcon
+                width="32px"
+                height="32px"
+                fill="currentColor"
+                class={css({ margin: "0 0.5em" })}
+              />
+            </p.a>
+          </p.div>
           <Button variant="filled" size="md" id="menu-button"> menu </Button>
         </HStack>
       </p.div>
