@@ -63,7 +63,7 @@ https://nasubi.dev
 - 予約投稿などの高度な機能の実装方法
 
 参考になるサイト:
-[Obsidianを使って生産性を高める #新人プログラマ応援 - Qiita](https://qiita.com/sypn/items/808636ea3bde6bfe6de7)
+[Obsidianを使って生産性を高める  - Qiita](https://qiita.com/sypn/items/808636ea3bde6bfe6de7)
 
 ## 採用するメリット
 
