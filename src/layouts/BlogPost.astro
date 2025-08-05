@@ -117,5 +117,7 @@ const replaceThumbnail = cleanAssetPath(thumbnail ?? "nasubi-new.webp");
     {headings && headings.length > 0 && <TableOfContents headings={headings} />}
   </p.div>
 
-  <slot />
+  <p.div className="blog-content">
+    <slot />
+  </p.div>
 </p.div>
