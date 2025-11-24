@@ -77,7 +77,7 @@ const replaceThumbnail = cleanAssetPath(thumbnail ?? "nasubi-new.webp");
 
     <HStack gap="4" fontSize="sm" color="gray.600">
       <p.div>
-        公開日: <FormattedDate date={createdAt} />
+        公開日: <FormattedDate date={createdAt} data-pagefind-meta="date" />
       </p.div>
       {
         updatedAt && (

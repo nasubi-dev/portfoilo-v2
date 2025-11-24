@@ -3,6 +3,8 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import TagsList from "@/components/TagsList.astro";
 import { type Post } from "@/type";
 import { styled as p, HStack, VStack } from "@styled-system/jsx";
+import { Icon } from "astro-iconify";
+import { emojiToIconify } from "@/utils/emojiToIconify";
 
 type Props = Post;
 
@@ -17,6 +19,8 @@ const {
   tags,
   icon,
 } = Astro.props;
+
+const iconName = emojiToIconify(icon);
 ---
 
 <p.a
@@ -55,12 +59,11 @@ const {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        fontSize="8rem"
         width="100%"
         height="100%"
         objectFit="cover"
       >
-        {icon ?? "🍆"}
+        <Icon name={iconName} size="8rem" />
       </p.div>
     </p.div>
 

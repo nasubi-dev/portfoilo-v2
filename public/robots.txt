@@ -1,0 +1,11 @@
+# robots.txt for nasubi.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nasubi.dev/sitemap-index.xml
+
+# Disallow specific paths if needed
+# Disallow: /api/
+# Disallow: /_astro/

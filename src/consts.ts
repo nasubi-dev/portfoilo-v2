@@ -12,6 +12,7 @@ export const TAGS_LIST = [
   { name: "Firebase", slug: "logos:firebase" },
   { name: "Obsidian", slug: "logos:obsidian-icon" },
   { name: "Figma", slug: "logos:figma" },
-  {name: "Cloudflare", slug: "logos:cloudflare-icon" },
-  {name: "R2", slug: "logos:cloudflare-icon" },
+  { name: "Cloudflare", slug: "logos:cloudflare-icon" },
+  { name: "R2", slug: "logos:cloudflare-icon" },
+  { name: "discord", slug: "logos:discord-icon" },
 ];

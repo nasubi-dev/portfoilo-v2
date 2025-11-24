@@ -40,9 +40,8 @@ function Content({ onClose }: { onClose: () => void }) {
         maxWidth="600px"
         boxShadow="md"
       >
-        <Dialog.Title>Search</Dialog.Title>
+        <Dialog.Title>検索</Dialog.Title>
         <Search />
-        <Dialog.Description>Search for something</Dialog.Description>
       </VStack>
     </Dialog.Content>
   );

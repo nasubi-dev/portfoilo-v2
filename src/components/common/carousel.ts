@@ -74,7 +74,7 @@ export const svaCarousel = sva({
         backgroundColor: "rgba(255, 255, 255, 0.8)",
       },
       _current: {
-        backgroundColor: "nsb.primary",
+        backgroundColor: "nsb-neutral.0",
       },
     },
   },

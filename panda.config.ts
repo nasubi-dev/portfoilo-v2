@@ -15,18 +15,6 @@ export default defineConfig({
 
   // Global CSS settings
   globalFontface: {
-    "Noto Sans JP": [
-      {
-        fontStyle: "normal",
-        fontWeight: "400",
-        src: "url('/fonts/NotoSansJP-Regular.woff2') format('woff2')",
-      },
-      {
-        fontStyle: "normal",
-        fontWeight: "700",
-        src: "url('/fonts/NotoSansJP-Bold.woff2') format('woff2')",
-      },
-    ],
     twemoji: {
       fontStyle: "normal",
       fontWeight: "400",
@@ -39,7 +27,8 @@ export default defineConfig({
     },
   },
   globalVars: {
-    "--noto-sans-jp": " twemoji, 'Noto Sans JP', sans-serif",
+    "--system-font":
+      "twemoji, 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     "--udev-gothic-nf": "'UDEV Gothic NF', monospace",
   },
   globalCss: {
@@ -47,7 +36,7 @@ export default defineConfig({
       color: "nsb.text",
       bg: "nsb.bg-overlay",
       fontFeatureSettings: "'plat'",
-      fontFamily: "var(--noto-sans-jp)",
+      fontFamily: "var(--system-font)",
       scrollBehavior: "smooth",
     },
     "h1, h2, h3, h4, h5, h6": {
@@ -277,7 +266,7 @@ export default defineConfig({
       tokens: {
         fonts: {
           sans: {
-            value: "var(--noto-sans-jp), sans-serif",
+            value: "var(--system-font), sans-serif",
           },
           mono: {
             value: "monospace",
