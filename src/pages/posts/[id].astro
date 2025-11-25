@@ -8,8 +8,7 @@ import { render } from "astro:content";
 import TableOfContents from "@/components/TableOfContents.astro";
 import { styled as p, VStack, HStack } from "@styled-system/jsx";
 import { Button } from "@/components/common/Button";
-import TwitterIcon from "../../../public/MdiTwitter.svg";
-import ClipboardIcon from "../../../public/MdiClipboardOutline.svg";
+import Icon from "astro-iconify";
 
 export async function getStaticPaths() {
   const posts = await getCollection("post");
@@ -47,7 +46,7 @@ const ogpPath = `posts/${post.id}`;
               borderWidth="1px"
               borderColor="nsb.bg-on"
             >
-              <ClipboardIcon width="20px" height="20px" />
+              <Icon icon="mdi:link-variant" width="20" height="20" />
             </Button>
             <p.a
               href={`https://twitter.com/share?url=${encodeURIComponent(
@@ -61,7 +60,7 @@ const ogpPath = `posts/${post.id}`;
                 borderWidth="1px"
                 borderColor="nsb.bg-on"
               >
-                <TwitterIcon width="20px" height="20px" />
+                <Icon icon="mdi:twitter" width="20" height="20" />
               </Button>
             </p.a>
           </HStack>
