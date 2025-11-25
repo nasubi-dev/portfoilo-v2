@@ -33,7 +33,7 @@ carousel:
 ページ上部のツールバー?(urlの部分の名称毎回忘れる)にアイコンが表示され､クリックをする｡すると､Obsidianの方に新規mdが作成されbase上でCard表示ができる
 
 ![[twitter2obsidian-1764028266917.webp]]
-![[twitter2obsidian-1764028417056.webp]]
+![[twitter2obsidian-1764028417056.webp|700x588]]
 
 2.ブックマークを一括で移行
 これがお気に入り
