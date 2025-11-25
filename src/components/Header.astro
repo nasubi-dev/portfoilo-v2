@@ -4,12 +4,9 @@ import { css } from "@styled-system/css";
 import { HStack, styled as p } from "@styled-system/jsx";
 import { SITE_TITLE } from "@/consts";
 import { Button } from "@/components/common/Button";
-import TwitterIcon from "../../public/MdiTwitter.svg";
-import GithubIcon from "../../public/MdiGithub.svg";
-import SearchIcon from "../../public/MdiMagnify.svg";
-import QrCodeIcon from "../../public/MdiQrcode.svg";
 import { SearchModal } from "@/components/ArkSearchModal";
 import { MenuModal } from "@/components/ArkMenuModal";
+import Icon from "astro-iconify";
 
 const currentPath = new URL(Astro.request.url).pathname
   .replace(/\/$/, "")
@@ -107,22 +104,12 @@ const currentPath = new URL(Astro.request.url).pathname
               ml="auto"
               id="search-button-mobile"
             >
-              <SearchIcon
-                width="28px"
-                height="28px"
-                fill="currentColor"
-                class={css({ margin: "0 0.5em" })}
-              />
+            <Icon icon="mdi:magnify" width="28" height="28" />
             </Button>
           </p.div>
           <p.div visibility="visible" sm={{ visibility: "collapse" }}>
-            <p.a href="/qr-code/">
-              <QrCodeIcon
-                width="32px"
-                height="32px"
-                fill="currentColor"
-                class={css({ margin: "0 0.5em" })}
-              />
+              <p.a href="/qr-code/">
+                <Icon icon="mdi:qrcode" width="32" height="32" />
             </p.a>
           </p.div>
           <Button variant="filled" size="md" id="menu-button"> menu </Button>
@@ -151,37 +138,17 @@ const currentPath = new URL(Astro.request.url).pathname
               ml="auto"
               id="search-button-mobile"
             >
-              <SearchIcon
-                width="28px"
-                height="28px"
-                fill="currentColor"
-                class={css({ margin: "0 0.5em" })}
-              />
+            <Icon icon="mdi:magnify" width="28" height="28" />
             </Button>
           </p.div>
           <p.a href="https://twitter.com/nasubi_dev" target="_blank">
-            <TwitterIcon
-              width="32px"
-              height="32px"
-              fill="currentColor"
-              class={css({ margin: "0 0.5em" })}
-            />
+            <Icon icon="mdi:twitter" width="32" height="32" />
           </p.a>
           <p.a href="https://github.com/nasubi-dev" target="_blank">
-            <GithubIcon
-              width="32px"
-              height="32px"
-              fill="currentColor"
-              class={css({ margin: "0 0.5em" })}
-            />
+            <Icon icon="mdi:github" width="32" height="32" />
           </p.a>
           <p.a href="/qr-code/">
-            <QrCodeIcon
-              width="32px"
-              height="32px"
-              fill="currentColor"
-              class={css({ margin: "0 0.5em" })}
-            />
+            <Icon icon="mdi:qrcode" width="32" height="32" />
           </p.a>
         </HStack>
       </p.div>

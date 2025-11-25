@@ -2,9 +2,7 @@
 import { css } from "@styled-system/css";
 import { HStack, VStack, styled as p } from "@styled-system/jsx";
 import { SITE_TITLE } from "@/consts";
-import TwitterIcon from "../../public/MdiTwitter.svg";
-import GithubIcon from "../../public/MdiGithub.svg";
-
+import Icon from "astro-iconify";
 const today = new Date();
 ---
 
@@ -23,14 +21,14 @@ const today = new Date();
         target="_blank"
         aria-label="Twitter"
       >
-        <TwitterIcon width="32px" height="32px" fill="currentColor" />
+        <Icon icon="mdi:twitter" width="32" height="32" />
       </p.a>
       <p.a
         href="https://github.com/nasubi-dev"
         target="_blank"
         aria-label="GitHub"
       >
-        <GithubIcon width="32px" height="32px" fill="currentColor" />
+        <Icon icon="mdi:github" width="32" height="32" />
       </p.a>
     </HStack>
 
