@@ -3,14 +3,14 @@ id: CodO0iV2bFVcKOycYxGmV
 slug: video-autoplay-loop
 title: video-autoplay-loop
 author: nasubi
-description:
+description: 表示範囲内にある動画をすべて再生する拡張機能
 tags:
+  - extension
 createdAt: 2025-11-25T00:42+09:00
 updatedAt: 2025-11-25T00:42+09:00
 thumbnail: "![[video-autoplay-loop-1763999366993.webp]]"
 carousel:
 ---
-![[video-autoplay-loop-1763999366993.webp]]
 ## 概要
 60 fps という海外の素晴らしいUIをまとめたサイトがあって､デザインとかモーションが思いつかないときに参考にしていました｡
 
