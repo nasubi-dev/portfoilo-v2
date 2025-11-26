@@ -4,7 +4,6 @@ import { ContentContainer } from "@/components/common/ContentContainer";
 import { HStack, VStack, styled as p } from "@styled-system/jsx";
 import { getCollection } from "astro:content";
 import { render } from "astro:content";
-import { Button } from "@/components/common/Button";
 import Avatar from "@/components/Avatar.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Icon from "astro-iconify";
@@ -38,13 +37,13 @@ const profiles = await Promise.all(
           />
           <HStack gap="3">
             <p.a href="https://twitter.com/nasubi_dev" target="_blank">
-              <Icon icon="mdi:twitter" width="32" height="32" />
+              <Icon name="mdi:twitter" width="20" height="20" />
             </p.a>
             <p.a href="https://github.com/nasubi-dev" target="_blank">
-              <Icon icon="mdi:github" width="32" height="32" />
+              <Icon name="mdi:github" width="20" height="20" />
             </p.a>
             <p.a href="/qr-code/">
-              <Icon icon="mdi:qrcode" width="32" height="32" />
+              <Icon name="mdi:qrcode" width="20" height="20" />
             </p.a>
           </HStack>
         </VStack>
