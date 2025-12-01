@@ -8,6 +8,8 @@ import { css } from "@styled-system/css";
 import { ArkCarousel } from "@/components/ArkCarousel";
 import { R2_BUCKET } from "@/consts";
 import cleanAssetPath from "@/utils/cleanAssetPath";
+import { Icon } from "astro-iconify";
+import { emojiToIconify } from "@/utils/emojiToIconify";
 
 type Props =
   | (Product & {
@@ -36,6 +38,8 @@ const {
 } = Astro.props;
 
 const replaceThumbnail = cleanAssetPath(thumbnail ?? "nasubi-new.webp");
+
+const iconName = emojiToIconify(icon);
 ---
 
 <p.div width="100%">
@@ -70,7 +74,7 @@ const replaceThumbnail = cleanAssetPath(thumbnail ?? "nasubi-new.webp");
           height="100%"
           objectFit="cover"
         >
-          {icon ?? "🍆"}
+          <Icon name={iconName} size="16rem" />
         </p.div>
       )
     }
