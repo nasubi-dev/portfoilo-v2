@@ -311,7 +311,7 @@ function remarkWikiLinks() {
           // 動画
           parts.push({
             type: "html",
-            value: `<video src="${r2Url}" controls width="100%" alt="${displayText}"></video>`,
+            value: `<video src="${r2Url}" controls width="100%" class="media-video"></video>`,
           });
         } else {
           // 画像 - 直接HTMLとして出力 ASTノードが悪さをする(原因不明)

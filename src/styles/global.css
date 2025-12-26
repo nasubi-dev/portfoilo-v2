@@ -46,6 +46,17 @@ article img,
   display: block;
 }
 
+/* 動画メディアのスタイル */
+video,
+.media-video {
+  max-height: 600px !important;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem auto;
+  display: block;
+}
+
 /* OGPの埋め込み画像は例外にする */
 .link-card img,
 .link-card-grid img,
