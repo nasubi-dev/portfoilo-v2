@@ -11,7 +11,7 @@ tags:
   - Cloudflare
   - R2
 createdAt: 2025-05-17T01:07+09:00
-updatedAt: 2025-05-29T01:35+09:00
+updatedAt: 2025-12-27T04:10
 icon: 🗒
 ---
 はじめまして､なすび(@nasubi_dev)です｡
