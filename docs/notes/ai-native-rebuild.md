@@ -52,7 +52,7 @@ Cloudflare Pages の Git 連携は、main 以外のブランチもプレビュ�
 |---|---|---|
 | スキーマ（`src/content.config.ts`） | 流用 | そのままで A は回る。日付のタイムゾーンの検査だけ足す |
 | 記事 6 本・products 8 本・about | 流用 | どのバージョンでもそのままビルドが通る |
-| Markdown の拡張（リンクカード、WikiLink、見出しのリンク） | 流用（書き方を直す） | Astro 7 でも出力は同じ。Astro 7 では `@astrojs/markdown-remark` を足す必要があり、`markdown.remarkPlugins` の書き方は非推奨になったので `unified({...})` に移す |
+| Markdown の拡張（リンクカード、WikiLink、見出しのリンク） | TanStack Markdown に移す | 下の「再調査: Markdown の処理を TanStack Markdown に移す」。試作で今の出力とほぼ同じになり、remark・rehype の依存 4 つが要らなくなる |
 | デザイン（Panda CSS 0.53、Ark UI） | 流用（Panda は 0.53 のまま） | Panda 2 に上げると `{ base, md }` のレスポンシブ指定が効かなくなる警告が 11 件出て、CSS が 48K から 32K に減る。Panda 2 への移行は作り直しとは別のイシューにする |
 | 検索（pagefind） | 流用 | 1.6 で通る。今はヘッダーやフッターも索引に入るので、本文に `data-pagefind-body` を付ける |
 | OGP | 作り直す | `og:image` が SVG で、X や Facebook は SVG を表示しない。`functions/posts/_middleware.ts`（vercel-og、タイトルの `div` だけ）と `src/pages/api/ogp/[slug].ts`（SVG）の 2 つが並んでいる。`og:description` も全ページがサイトの説明文。ビルド時に PNG を作る形（satori など）にまとめ、記事の `description` を使う |
@@ -73,7 +73,7 @@ Node 24.0.0、Bun 1.2.20 で、リポジトリのコピーを使って試した�
 
 記事のページ（`/posts/obsidian-as-serious-cms/`）を比べると、画像・リンクカード・見出しのリンクの数は今のものと同じだった。
 
-作り直しは「Astro 7 + Panda 0.53 + `@astrojs/markdown-remark`」から始められる。Astro 7 は Node 22.23.4 以上が要る（Astro 5.16 は 18.20.8 以上）。
+作り直しは「Astro 7 + Panda 0.53」から始められる（Markdown を TanStack Markdown に移すなら `@astrojs/markdown-remark` は要らない）。Astro 7 は Node 22.23.4 以上が要る（Astro 5.16 は 18.20.8 以上）。
 
 ## この PR のプレビュー
 
@@ -81,3 +81,72 @@ Node 24.0.0、Bun 1.2.20 で、リポジトリのコピーを使って試した�
 - `.node-version`（`22`）を足すと、プレビューは Node 22.23.4 で通った。PR のチェックが緑になり、Cloudflare のボットが PR にプレビュー URL をコメントした
 - プレビュー（`https://<ハッシュ>.portfoilo-v2.pages.dev`、ブランチ名の別名 `https://nasubi-dev-nas-114.portfoilo-v2.pages.dev`）はどちらも 200 で開け、`x-robots-tag: noindex` が付いていた。検索エンジンには載らない
 - 本番には `NODE_VERSION` の環境変数があるので、マージ後もたぶん 18.20.8 のまま（環境変数と `.node-version` のどちらが優先かは確かめていない。22 になっても Astro 5.16 は動く）。Astro 7 は Node 22.23.4 以上が要るので、上げるときは本番の `NODE_VERSION` を消すか 22 にする
+
+## 再調査: Markdown の処理を TanStack Markdown に移す
+
+2026-11-23 に追加。`astro.config.mjs` の自作の remark プラグインをやめ、[TanStack Markdown](https://tanstack.com/markdown/latest/docs)（`@tanstack/markdown` 1.2.1、2026-11-19 公開）に移せるかを、Astro 7 で試作して確かめた。
+
+**結論: 移せる。** 記事・products・about の全ページで、カード以外の出力（画像、動画、YouTube の埋め込み、見出しの ID、リスト、コード）が今と同じになった。カードの付け方は「リンクだけの行をカードにする」に変わる。これに合わせて、アフィリエイトのリンクと記事どうしのリンクも扱える。
+
+### TanStack Markdown
+
+ブログやドキュメント向けの小さな Markdown パーサーで、依存が無い。CommonMark・GFM を全部は追わず、足りないものは拡張で足す。
+
+- パーサーは同期。OGP のような fetch は、パースのあと、描く前にまとめて済ませる
+- 拡張でできること: 独自のインライン記法（`![[...]]` など）、パース後の文書の書き換え、HTML を描くときのフック
+- 生の HTML は既定でエスケープされる。`allowHtml: true` で通る（`<script>` も通る）
+- コードの色付けは外に出してある。試作では今と同じ shiki の houston を使った
+
+Astro 7 では、ページで `renderPost(post.body)` を呼び、返った HTML を `<Fragment set:html={…} />` で出す。目次の見出しも同じ関数から返す。Astro の `render()` と Markdown の設定は使わないので、`@astrojs/markdown-remark`・`rehype-slug`・`rehype-autolink-headings`・`unist-util-visit` を外せる。外してもビルドは通った。
+
+### 今の自作の処理がしていること
+
+| 処理 | 今の実装 | 記事での使われ方 | 移したあと |
+|---|---|---|---|
+| `![[画像]]`・`![[動画]]` | `remarkWikiLinks`。R2 の URL にし、動画は `<video>` | 70 か所 | 拡張で同じ出力にした |
+| `[[ページ]]` | 同上。リンクの URL がファイル名のままになる | 0 か所 | 記事の一覧から URL とタイトルを引き、カードにする |
+| リンクカード | `remarkEmbedLinks`。**本文のリンクをすべて**ビルド時に fetch し、OGP のカードにする | 49 枚 | リンクだけの行をカードにする |
+| YouTube・Spotify | 同上。`watch?v=`・`youtu.be` は iframe | YouTube 1 か所 | 同じ |
+| x.com のポスト | 専用の処理は無い。ほかのサイトと同じく OGP のカードで、X が返す OGP（アカウント名と画像）が出る | 11 か所 | 同じ |
+| 見出しの ID とリンク | `rehype-slug`・`rehype-autolink-headings` | 121 個 | ID は全部同じ。🔗 は `<h2>` の中に入る |
+| コード | Astro の shiki（houston） | 3 か所 | 同じ |
+| 裸の URL | Astro の GFM | 17 行 | `autolinksExtension` で同じ |
+
+記事は表・脚注・チェックボックス・生の HTML・callout を使っていない。
+
+### 移すときに要る手当て
+
+試作で見つかった、そのままでは崩れるところ。
+
+1. **タブで字下げしたリストが入れ子にならない。** Obsidian の既定はタブで、about と記事 2 本が崩れる。パースの前に、コードブロックの外の行頭のタブを空白 4 つに置き換えた
+2. **既定の見出し ID が日本語を落とす。**「見出し A」が `a` になる。github-slugger と同じ規則の関数を `headingIds` に渡すと、121 個すべて今と同じ ID になった
+3. **詰めて書いたリストの中では、段落のフックが呼ばれない。** 描くときではなく、パースのあとに文書を書き換えてカードにした
+4. **🔗 の位置が変わる。** 今は `<div class="heading-wrapper">` で見出しと 🔗 を横に並べている。移したあとは `<h2>` の中に入るので、`panda.config.ts` の `.heading-wrapper` の CSS を見出しに付け替える
+
+### カードの付け方が変わるところ
+
+今はリンクなら文中でもカードになり、文が途中で切れる。移したあとは、行にリンクしか無いときだけカードにする（箇条書きの項目、段落の続きの行も含む）。今の記事で文字のリンクに変わるのは 8 か所。
+
+- 文中のリンク: 北海道の記事の YouTube のチャンネル
+- 「ラベル: URL」の行: `GitHub: https://…`（fookeys）、`URL: https://…`（fookeys-mini で 3 か所）、`引用: https://…`（Obsidian の記事）、`GitHub: [...](...)`・`公式サイト: [...](...)`（kintai-discord）
+
+カードのままにしたいところは、URL を次の行に移せばよい。
+
+### サイト内のリンクのカード
+
+今は `nasubi.dev` のリンクも本番のサイトから OGP を取るので、about のカードのタイトルは 5 枚とも「nasubi.dev」になっている。PR のブランチで足したばかりの記事は、本番にまだ無いのでカードが空になる。
+
+試作では、ビルドのときに記事と products の一覧（URL、ファイル名、タイトル）を作り、`https://nasubi.dev/posts/…` のリンクと `[[記事のファイル名]]` を一覧から引いてカードにした。fetch しないので、同じ PR で足した記事どうしでもカードが出る。about のカードも、記事の本当のタイトルが出るようになった。
+
+### アフィリエイトのリンクと広告の表記
+
+[NAS-116](https://linear.app/nasubi/issue/NAS-116) の調査（vault の `auto/claude/個人ブログのアフィリエイトの始め方.md`）で決めた処理は、移したあとの形でそのまま入る。
+
+- アフィリエイトのリンクはホスト名で見分ける（`af.moshimo.com`・`px.a8.net`・`hb.afl.rakuten.co.jp`・`ck.jp.ap.valuecommerce.com`・`amzn.to`、`tag=` の付いた `amazon.co.jp`）。行にそれだけでもカードにせず fetch もしない。`rel="sponsored noopener" target="_blank"` の文字のリンクになることを試作で確かめた
+- もしもの「かんたんリンク」のような ASP の HTML を貼るなら `allowHtml: true` にする。記事を書くのは本人と bot だけなので、通してよい
+- 冒頭の「この記事には広告（アフィリエイトリンク）を含みます」は Markdown ではなくレイアウトの仕事で、スキーマに `pr` を足して `BlogPost.astro` で出す。Markdown の処理は関係しない
+
+### ついでに見つかったこと
+
+- `src/pages/rss.xml.js` が無いコレクション `blog` を読んでいて、RSS が空になっている（ビルドの警告 `The collection "blog" does not exist or is empty`）。`post` に直す
+- 試作（Astro 7）では、about の SKILLS・ORGANIZATIONS・EXPERIENCES の並びが逆になる。コレクションの並びに頼らず、ページで順番を決める
