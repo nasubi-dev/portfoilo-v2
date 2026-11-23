@@ -39,7 +39,7 @@ Cloudflare Pages の Git 連携は、main 以外のブランチもプレビュ�
 
 - **スキーマ**: 変えなくても回る。ただし bot が `id`（21 文字の英数字とハイフン）を作れるようにする（nanoid など）。日付は `+09:00` 付きで書く決まりにし、スキーマでも `+09:00` か `Z` が無いものを弾く。今も `updatedAt` が 2 本タイムゾーン無しで、ビルドする機械の時刻（Cloudflare では UTC）で読まれて 9 時間ずれる。`draft` は A では要らない
 - **CI**: Cloudflare Pages のビルドが PR のチェックになるので、新しく足さなくてよい。bot が PR を出す前に手元で `bun run build` を通す
-- **Cloudflare Pages の設定**: プレビューのデプロイが「すべてのブランチ」になっているか、ダッシュボードで確かめる（今の動きからは有効に見える）
+- **Cloudflare Pages の設定**: プレビューのデプロイは「すべてのブランチ」、PR へのコメントも有効になっている。Node のバージョンは本番の環境変数ではなく `.node-version` で決め、本番とプレビューをそろえる（下の「この PR のプレビュー」）
 - **bot の権限**:
   - GitHub: このリポジトリだけに絞った fine-grained token（Contents と Pull requests の読み書き）。マージはしないので、main を branch protection で PR 必須にしてもよい
   - R2: 画像を上げるため、バケットを絞った R2 の API トークン（Object Read & Write）
@@ -73,8 +73,11 @@ Node 24.0.0、Bun 1.2.20 で、リポジトリのコピーを使って試した�
 
 記事のページ（`/posts/obsidian-as-serious-cms/`）を比べると、画像・リンクカード・見出しのリンクの数は今のものと同じだった。
 
-作り直しは「Astro 7 + Panda 0.53 + `@astrojs/markdown-remark`」から始められる。
+作り直しは「Astro 7 + Panda 0.53 + `@astrojs/markdown-remark`」から始められる。Astro 7 は Node 22.23.4 以上が要る（Astro 5.16 は 18.20.8 以上）。
 
 ## この PR のプレビュー
 
-（PR を出したあとに追記）
+- 最初のコミットではプレビューのビルドが落ちた。Cloudflare Pages の `NODE_VERSION`（18.20.8）は本番の環境にだけあり、プレビューは既定の Node 18.17.1 で動いて、Astro 5.16 が「18.20.8 以上」で止まった
+- `.node-version`（`22`）を足すと、プレビューは Node 22.23.4 で通った。PR のチェックが緑になり、Cloudflare のボットが PR にプレビュー URL をコメントした
+- プレビュー（`https://<ハッシュ>.portfoilo-v2.pages.dev`、ブランチ名の別名 `https://nasubi-dev-nas-114.portfoilo-v2.pages.dev`）はどちらも 200 で開け、`x-robots-tag: noindex` が付いていた。検索エンジンには載らない
+- 本番は `NODE_VERSION` の環境変数のほうが優先されるので、このままマージしても 18.20.8 のまま。Astro 7 は Node 22.23.4 以上が要るので、上げるときは本番の `NODE_VERSION` を消すか 22 にする
