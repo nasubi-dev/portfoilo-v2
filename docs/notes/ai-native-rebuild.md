@@ -80,4 +80,4 @@ Node 24.0.0、Bun 1.2.20 で、リポジトリのコピーを使って試した�
 - 最初のコミットではプレビューのビルドが落ちた。Cloudflare Pages の `NODE_VERSION`（18.20.8）は本番の環境にだけあり、プレビューは既定の Node 18.17.1 で動いて、Astro 5.16 が「18.20.8 以上」で止まった
 - `.node-version`（`22`）を足すと、プレビューは Node 22.23.4 で通った。PR のチェックが緑になり、Cloudflare のボットが PR にプレビュー URL をコメントした
 - プレビュー（`https://<ハッシュ>.portfoilo-v2.pages.dev`、ブランチ名の別名 `https://nasubi-dev-nas-114.portfoilo-v2.pages.dev`）はどちらも 200 で開け、`x-robots-tag: noindex` が付いていた。検索エンジンには載らない
-- 本番は `NODE_VERSION` の環境変数のほうが優先されるので、このままマージしても 18.20.8 のまま。Astro 7 は Node 22.23.4 以上が要るので、上げるときは本番の `NODE_VERSION` を消すか 22 にする
+- 本番には `NODE_VERSION` の環境変数があるので、マージ後もたぶん 18.20.8 のまま（環境変数と `.node-version` のどちらが優先かは確かめていない。22 になっても Astro 5.16 は動く）。Astro 7 は Node 22.23.4 以上が要るので、上げるときは本番の `NODE_VERSION` を消すか 22 にする
